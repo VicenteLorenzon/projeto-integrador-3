@@ -1,0 +1,332 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body>
+  {% include 'partials/header.html' %}
+  <main>
+    <div>
+      <!--inicio container-->
+      <div class="container-fluid">
+        <div class="container">
+          <div class="row py-5">
+            <div class="col-2"></div>
+            <div class="col">
+              <h1>Seus dados</h1>
+            </div>
+            <div class="col-3"></div>
+          </div>
+          <div class="row pb-2">
+              <div class="col-2"></div>
+              <div class="col">
+                <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="justify-content-between">
+                        <div>
+                          <div class="ms-3">
+                            <h5>Dados básicos</h4>
+                                <div class="container"> 
+                                    <h6 class="col-11 mb-2">Nome:</h6>            
+                                    <h6 class="mb-2">Sobrenome:</h6>
+                                    <h6 class="mb-2">CPF:</h6>
+                                </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="container">
+                        <div class="row">
+                            <div class="col-9"></div>
+                            <div class="col">
+                              <button type="button" class="btn btn-main mt-2" style="width: 175px" data-bs-toggle="modal" data-bs-target="#dadosModal">
+                                Editar
+                              </button>
+                              <div class="modal fade" id="dadosModal" tabindex="-1" aria-labelledby="dadosModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="dadosModalLabel">Editar dados</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <div class="row">
+                                              <div class="col">
+                                                <input type="text" class="form-control" placeholder="Nome" aria-label="Nome">
+                                              </div>
+                                              <div class="col">
+                                                <input type="text" class="form-control" placeholder="Sobrenome" aria-label="Sobrenome">
+                                              </div>
+                                            </div>
+                                            <div class="row pt-4">
+                                              <div class="col">
+                                                <input type="email" class="form-control" placeholder="E-mail" aria-label="E-mail">
+                                              </div>
+
+                                            </div>
+                                            <div class="row pt-4">
+                                              <div class="col">
+                                                <input type="text" class="form-control" id="cpf" placeholder="CPF" aria-label="CPF">
+                                              </div>
+                                            </div>
+                                            <div class="row pt-4">
+                                              <div class="col">
+                                                <input type="text" class="form-control" id="telefone" placeholder="Telefone" aria-label="Telefone">
+                                              </div>
+                                            </div>
+                                            <div class="row pt-4">
+                                              <div class="col">
+                                                <input type="password" class="form-control" placeholder="Senha" aria-label="Senha">
+                                              </div>
+                                            </div>
+                                            <div class="row pt-4">
+                                              <div class="col">
+                                                <input type="password" class="form-control" placeholder="Confirmar senha" aria-label="Confirmar senha">
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancelar</button>
+                                      <button type="button" class="btn btn-main">Salvar</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        </div>  
+                      </div>                          
+                    </div>
+                  </div>              
+              </div>
+            <div class="col-2"></div>
+          </div>
+          <div class="row pb-2">
+            <div class="col-2"></div>
+            <div class="col">
+              <div class="card mb-3">
+                  <div class="card-body">
+                    <div class="justify-content-between">
+                      <div>
+                        <div class="ms-3">
+                          <h5>Endereço</h4>
+                              <div class="container"> 
+                                <div class="row">
+                                    <h6 class="col-11 mb-2">Endereço 1:</h6>  
+                                    <div class="col ms-4"><a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt iconHover"></i></a></div>
+                                </div>
+                                <div class="row">
+                                    <h6 class="col-11 mb-2">Endereço 2:</h6>  
+                                    <div class="col ms-4"><a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt iconHover"></i></a></div>
+                                </div>
+                              </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="container">
+                      <div class="row">
+                          <div class="col-9"></div>
+                          <div class="col">
+                            <button type="button" class="btn btn-main mt-2" style="width: 175px" data-bs-toggle="modal" data-bs-target="#enderecoModal">
+                                Adicionar
+                            </button>
+                            <div class="modal fade" id="enderecoModal" tabindex="-1" aria-labelledby="enderecoModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="enderecoModalLabel">Adicionar endereço</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <div class="row">
+                                              <div class="col">
+                                                <input type="text" class="form-control" id="CEP" placeholder="CEP" aria-label="CEP">
+                                              </div>
+                                            </div>
+                                            <div class="row pt-4">
+                                              <div class="col">
+                                                <input type="text" class="form-control" placeholder="Cidade" aria-label="Cidade">
+                                              </div>
+                                            </div>
+                                            <div class="row pt-4">
+                                              <div class="col">
+                                                <input type="text" class="form-control" placeholder="Rua" aria-label="Rua">
+                                              </div>
+                                            </div>
+                                            <div class="row pt-4">
+                                              <div class="col-8">
+                                                <input type="text" class="form-control" placeholder="Complemento" aria-label="Complemento">
+                                              </div>
+                                              <div class="col-4">
+                                                <input type="text" class="form-control" placeholder="Número" aria-label="Número">
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancelar</button>
+                                      <button type="button" class="btn btn-main">Adicionar</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                      </div>  
+                    </div>                          
+                  </div>
+                </div>              
+            </div>
+          <div class="col-2"></div>
+        </div>
+        <div class="row pb-2">
+            <div class="col-2"></div>
+            <div class="col">
+              <div class="card mb-3">
+                  <div class="card-body">
+                    <div class="justify-content-between">
+                      <div>
+                        <div class="ms-3">
+                          <h5>Forma de pagamento</h4>
+                              <div class="container"> 
+                                <div class="row">
+                                    <h6 class="col-11 mb-2">Cartão 1:</h6>  
+                                    <div class="col ms-4"><a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt iconHover"></i></a></div>
+                                </div>
+                                <div class="row">
+                                    <h6 class="col-11 mb-2">Cartão 2::</h6>  
+                                    <div class="col ms-4"><a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt iconHover"></i></a></div>
+                                </div>
+                              </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="container">
+                      <div class="row">
+                          <div class="col-9"></div>
+                          <div class="col">
+                            <button type="button" class="btn btn-main mt-2" style="width: 175px" data-bs-toggle="modal" data-bs-target="#cartaoModal">
+                                Adicionar
+                            </button>
+                            <div class="modal fade" id="cartaoModal" tabindex="-1" aria-labelledby="cartaoModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="cartaoModalLabel">Adicionar cartão</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col">
+                                                  <input type="text" class="form-control" placeholder="Nome" aria-label="Nome">
+                                                </div>
+                                                <div class="col">
+                                                  <input type="text" class="form-control" placeholder="Sobrenome" aria-label="Sobrenome">
+                                                </div>
+                                            </div>
+                                            <div class="row pt-4">
+                                              <div class="col">
+                                                <input type="text" class="form-control" placeholder="Numero do cartão" aria-label="Numero do cartão">
+                                              </div>
+                                            </div>
+                                            <div class="row pt-4">
+                                                <div class="col">
+                                                  <input type="text" class="form-control" placeholder="Data de expiração" aria-label="Data de expiração">
+                                                </div>
+                                                <div class="col">
+                                                  <input type="text" class="form-control" placeholder="CVC" aria-label="CVC">
+                                                </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancelar</button>
+                                      <button type="button" class="btn btn-main">Adicionar</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                      </div>  
+                    </div>                          
+                  </div>
+                </div>              
+            </div>
+          <div class="col-2"></div>
+        </div>
+        <!--quarta linha-->
+        <div class="row mt-5">
+          <footer class="text-center text-lg-start">
+            <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+              <div>
+                <a href="" class="me-4 text-reset">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+            </section>
+            <section class="">
+              <div class="container text-center text-md-start mt-5">
+                <div class="row mt-3">
+                  <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">
+                      <i class="fas fa-gem me-3"></i>Pet Shop
+                    </h6>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, non.
+                    </p>
+                  </div>
+                  <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">
+                      Produtos
+                    </h6>
+                    <p>
+                      <a href="#!" class="text-reset">Rações</a>
+                    </p>
+                    <p>
+                      <a href="#!" class="text-reset">Brinquedos</a>
+                    </p>
+                    <p>
+                      <a href="#!" class="text-reset">Conforto</a>
+                    </p>
+                    <p>
+                      <a href="#!" class="text-reset">Utilidades</a>
+                    </p>
+                  </div>
+                  <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">
+                      Links uteis
+                    </h6>
+                    <p>
+                      <a href="#!" class="text-reset">Produtos</a>
+                    </p>
+                    <p>
+                      <a href="#!" class="text-reset">Perguntas frequentes</a>
+                    </p>
+                  </div>
+                  <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">
+                      Contato
+                    </h6>
+                    <p><i class="fas fa-home me-3"></i> Erechim, Rua Getulio Vargas, N° 206</p>
+                    <p>
+                      <i class="fas fa-envelope me-3"></i>
+                      info@example.com
+                    </p>
+                    <p><i class="fas fa-phone me-3"></i> 54 93124-5432</p>
+                    <p><i class="fas fa-print me-3"></i> 54 93124-5432</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+              © 2022 Copyright:
+              <a class="text-reset fw-bold" href="...">PetShop.com</a>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

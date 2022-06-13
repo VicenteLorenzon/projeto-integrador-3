@@ -1,0 +1,181 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@200&display=swap');
+
+:root {
+  /* colors */
+  --primary: #17BEBB;
+  --primary-dark: #1a8180;
+  --secondary: #2E282A;
+  --optionalColor: #CD5334;
+  --lightColor-100: #fad8d6;
+  --lightColor-150: #dd9c99;
+  --mediumColor-100: #ffe3cb;
+  --mediumColor-150: #EDB88B;
+  --black: #000000;
+  --gray: #d9d9d9;
+  --white: #FFFFFF;  
+
+  /* fonts  */
+  --headingFont: 'Roboto', sans-serif;
+  --bodyFont: 'Nunito', sans-serif;
+  --smallText: 0.7em;
+  /* rest of the vars */
+  --backgroundColor: var(--grey-50);
+  --textColor: var(--grey-900);
+  --borderRadius: 0.25rem;
+  --letterSpacing: 1px;
+  --transition: 0.3s ease-in-out all;
+  --max-width: 1120px;
+  --fixed-width: 600px;
+
+  --shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+body{
+    font-family: var(--headingFont) !important;
+    padding-top: 6.5rem;
+}
+
+.main{
+    margin-top: 2rem;
+}
+
+
+.navbar {
+    background-color: var(--primary);
+    padding: 3rem 2rem;
+    height: 0rem;
+    min-height: 12vh;
+}
+
+nav .navbar ul{
+    list-style-type: none;
+}
+
+nav .navbar-nav li a{
+    color: var(--black) !important;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.navbar-nav i:hover{
+    color: var(--white) !important;
+}
+
+nav .navbar-nav li a:hover{
+    color: var(--white) !important;
+}
+.carousel img{
+    width: 950px;
+    height: 620px;
+    max-width: 100%;
+    max-height: 800px !important;
+    object-fit: cover;
+}
+
+.navbar-brand{
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem !important;
+    text-decoration: none;
+    color: var(--secondary) !important;
+}
+
+.navbar-brand:hover{
+    text-decoration: none;
+    color: var(--secondary) !important;
+}
+
+.navbar-toggler{
+    background-color: var(--secondary) !important;
+    border: none;
+    padding: 10px 6px;
+    outline: none;
+}
+
+.navbar-toggler:hover{
+    background-color:  #201c1d !important;
+}
+
+.navbar-toggler span{
+    color: var(--white) !important;
+}
+/*
+.navbar-expand-lg .navbar-nav .nav-link{
+    padding: 2rem 1.2rem;
+    font-size: 1.4rem;
+    position: relative;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link:hover{
+    border-top: 4px solid var(--secondary) !important;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link.active{
+    border-top: 4px solid var(--secondary) !important;
+    color: var(--secondary) !important;
+}
+*/
+
+
+.btn-main, .btn-main:active, .btn-main:visited{
+    background-color:  var(--primary) !important;
+    font-weight: 600 !important;
+}
+
+.btn-main:hover{
+    background-color: var(--primary-dark)  !important;
+    color: var(--white);
+}
+
+
+.btn-light100, .btn-light100:active, .btn-light100:visited {
+    background-color: var(--lightColor-100) !important;
+    font-weight: 600 !important;
+}
+
+.btn-light100:hover{
+    background-color: var(--lightColor-150) !important;
+    color: var(--white) !important;
+}
+
+.btn-medium100, .btn-medium100:active, .btn-medium100:visited {
+    background-color: var(--mediumColor-100) !important;
+    font-weight: 600 !important;
+}
+
+.btn-medium100:hover{
+    background-color: var(--mediumColor-150) !important;
+    color: var(--white) !important;
+}
+
+.painel{
+    background-color: var(--secondary);
+}
+
+.carousel-text{
+    color: var(--white);
+}
+
+.carousel-text h1{
+    font-size: 72px;
+}
+
+.carousel-text p{
+    font-size: 20px;
+}
+
+
+
+
+
+

@@ -1,0 +1,195 @@
+{% load static %}
+<header class="header">
+    <nav class="navbar navbar-expand-lg fixed-top header-nav navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand " href="{% url 'index' %}">
+                <img src="{% static 'dogpaw.png' %}" alt="" width="60" height="60" class="d-inline-block align-text-top">
+                Pet Shop
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+                <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                    <li class="nav-item ms-lg-5">
+                        <a class="nav-link" aria-current="page" href="{% url 'index' %}">Página inicial</a>
+                    </li>
+                    <li class="nav-item ms-lg-5">
+                        <a class="nav-link" href="{% url 'produtos' %}">Produtos</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item ms-lg-5">
+                        <a class="nav-link" href="{% url 'meus_pets' %}">Meus pets</a>
+                    </li>
+                    <li class="nav-item ms-lg-5">
+                        <a class="nav-link" href="{% url 'servicos' %}">Serviços</a>
+                    </li>
+                    {% endif %}
+                    </li>
+                    <li class="nav-item ms-lg-5">
+                        <a class="nav-link" href="{% url 'perguntas_frequentes' %}">Perguntas frequentes</a>
+                    </li>
+                </ul>
+                {% if user.is_authenticated %}
+                <div class="header-btn">
+                    <ul class="navbar-nav m-auto">
+                      <li class="nav-item">
+                        <button type="button" class="btn ms-2" data-bs-toggle="modal" data-bs-target="#carrinhoModal"><i class="fa-solid fa-cart-shopping fa-2x"></i></button>
+                      </li> 
+                      <li class="nav-item dropdown">
+                        <button type="button" class="btn ms-2" id="navbrDropdown" role="button" data-bs-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">
+                          <i class="fa-regular fa-bell fa-2x">
+                            <div class="dropdown-toggle" id="customDropdown"></div>
+                          </i>
+                        </button>
+                        <ul class="dropdown-menu p-3 dropdown-menu-end" aria-labelledby="navbarDropdown" id="notifMenu">
+                          <li><a id="notifInfo" href="{% url 'index' %}">Lorem ipsum dolor sit amet consectetur.</a></li>
+                          <div class="dropdown-divider"></div>
+                          <li><a id="notifInfo" href="{% url 'index' %}">Lorem ipsum dolor sit amet consectetur.</a></li>
+                        </ul>
+                        <!--<i class="fa-solid fa-bell"></i>-->
+                      </li>
+                      <li class="nav-item dropdown">
+                        <button type="button" class="btn ms-2" id="navbrDropdown" role="button" data-bs-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">
+                          <i class="fa-solid fa-user fa-2x">
+                            <div class="dropdown-toggle" id="customDropdown""></div>
+                            </i>
+                          </button>
+                          <ul class=" dropdown-menu p-3 dropdown-menu-end" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" id="userInfo" href="{% url 'meus_dados' %}">Meus dados</a></li>
+                      <div class="dropdown-divider"></div>
+                      <li><a class="dropdown-item" id="userInfo" href="{% url 'meus_dados' %}">Sair</a></li>
+                    </ul>
+                    </li>
+                    </ul>
+                  </div>
+                  {% else %}
+                  <div class="header-btn">
+                    <ul class="navbar-nav m-auto">
+                      <a type="button" class="btn ms-3 btn-light100" href="{% url 'cadastro' %}">Cadastrar-se</a>
+                      <a type="button" class="btn ms-3 btn-medium100" href="{% url 'login' %}">Entrar</a>
+                    </ul>
+                  </div>
+                  {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="modal fade" id="carrinhoModal" tabindex="-1" aria-labelledby="carrinhoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="carrinhoModalLabel">Carrinho</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                  <div class="row pb-2">
+                    <div class="col">
+                      <div class="card mb-3">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                              <div class="d-flex flex-row align-items-center">
+                                <div>
+                                  <a href="{% url 'index' %}">
+                                    <img
+                                    src="{% static 'dogpaw.png' %}"
+                                    class="img-fluid rounded-3" style="width: 65px;">
+                                  </a> 
+                                </div>
+                                <div class="ms-3">
+                                  <h5>Item carrinho</h5>
+                                </div>
+                              </div>
+                              <div class="d-flex flex-row align-items-center">
+                                <div style="width: 120px;">
+                                  <h5 class="mb-0 ps-3">R$30,00</h5>
+                                </div>
+                                <button style="color: #cecece;"><i class="fas fa-trash-alt iconHover"></i></button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>              
+                    </div>
+                </div>
+                <div class="row pb-2">
+                    <div class="col">
+                      <div class="card mb-3">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                              <div class="d-flex flex-row align-items-center">
+                                <div>
+                                  <a href="{% url 'index' %}">
+                                    <img
+                                    src="{% static 'dogpaw.png' %}"
+                                    class="img-fluid rounded-3" style="width: 65px;">
+                                  </a> 
+                                </div>
+                                <div class="ms-3">
+                                  <h5>Item carrinho</h5>
+                                </div>
+                              </div>
+                              <div class="d-flex flex-row align-items-center">
+                                <div style="width: 120px;">
+                                  <h5 class="mb-0 ps-3">R$30,00</h5>
+                                </div>
+                                <button style="color: #cecece;"><i class="fas fa-trash-alt iconHover"></i></button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>              
+                    </div>
+                </div>
+                <div class="row pb-2">
+                    <div class="col">
+                      <div class="card mb-3">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                              <div class="d-flex flex-row align-items-center">
+                                <div>
+                                  <a href="{% url 'index' %}">
+                                    <img
+                                    src="{% static 'dogpaw.png' %}"
+                                    class="img-fluid rounded-3" style="width: 65px;">
+                                  </a> 
+                                </div>
+                                <div class="ms-3">
+                                  <h5>Item carrinho</h5>
+                                </div>
+                              </div>
+                              <div class="d-flex flex-row align-items-center">
+                                <div style="width: 120px;">
+                                  <h5 class="mb-0 ps-3">R$30,00</h5>
+                                </div>
+                                <button style="color: #cecece;"><i class="fas fa-trash-alt iconHover"></i></button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>              
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                      <hr class="mt-4">
+                  </div>
+                </div>
+                <div class="row pt-1">
+                  <div class="col-8">
+                      <h3>Total</h3>
+                  </div>
+                  <div class="col ps-4">
+                      <h3>R$90,00</h3>
+                  </div>
+                </div> 
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <a type="button" class="btn btn-main" href="{% url 'carrinho' %}">Prosseguir compra</a>
+            </div>
+          </div>
+        </div>
+      </div>
+</header>
