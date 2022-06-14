@@ -15,17 +15,19 @@
             </div>
             <div class="col-3"></div>
           </div>
+          <form action = "{% url 'login' %}" method="post">
+          {% csrf_token %}
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-              <input type="email" class="form-control" placeholder="Email" aria-label="Email">
+              <input type="email" class="form-control" placeholder="Email" aria-label="Email" name="email">
             </div>
             <div class="col-3"></div>
           </div>
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-              <input type="password" class="form-control" placeholder="Senha" aria-label="Senha">
+              <input type="password" class="form-control" placeholder="Senha" aria-label="Senha" name="senha">
             </div>
             <div class="col-3"></div>
           </div>
@@ -43,9 +45,10 @@
           </div>
           <div class="row pt-5">
             <div class="col-7"></div>
-            <a type="button" class="btn col btn-main" href="indexUser.html">Entrar</a>
+            <button type="submit" class="btn col btn-main">Entrar</button>
             <div class="col-3"></div>
-          </div>          
+          </div>
+          </form>          
         </div>
         <!--quarta linha-->
         <div class="row mt-5">
