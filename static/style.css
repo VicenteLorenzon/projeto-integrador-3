@@ -12,29 +12,13 @@
   --mediumColor-100: #ffe3cb;
   --mediumColor-150: #EDB88B;
   --black: #000000;
-  --gray: #d9d9d9;
+  --grey: #d9d9d9;
   --white: #FFFFFF;  
 
   /* fonts  */
   --headingFont: 'Roboto', sans-serif;
   --bodyFont: 'Nunito', sans-serif;
   --smallText: 0.7em;
-  /* rest of the vars */
-  --backgroundColor: var(--grey-50);
-  --textColor: var(--grey-900);
-  --borderRadius: 0.25rem;
-  --letterSpacing: 1px;
-  --transition: 0.3s ease-in-out all;
-  --max-width: 1120px;
-  --fixed-width: 600px;
-
-  --shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  --shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 body{
@@ -75,13 +59,11 @@ nav .navbar-nav li a{
 nav .navbar-nav li a:hover{
     color: var(--white) !important;
 }
-.carousel img{
-    width: 950px;
-    height: 620px;
-    max-width: 100%;
-    max-height: 800px !important;
-    object-fit: cover;
+
+#customDropdown{
+    display: none;
 }
+
 
 .navbar-brand{
     font-family: 'Pacifico', cursive;
@@ -109,38 +91,63 @@ nav .navbar-nav li a:hover{
 .navbar-toggler span{
     color: var(--white) !important;
 }
-/*
-.navbar-expand-lg .navbar-nav .nav-link{
-    padding: 2rem 1.2rem;
-    font-size: 1.4rem;
-    position: relative;
+
+.dropdown-menu, .dropdown-item{
+    background-color: var(--lightColor-150) !important;
 }
 
-.navbar-expand-lg .navbar-nav .nav-link:hover{
-    border-top: 4px solid var(--secondary) !important;
+#notifMenu{
+    background-color: var(--mediumColor-150) !important;
+    width: 200px !important;
+    max-width: 200px !important;
 }
 
-.navbar-expand-lg .navbar-nav .nav-link.active{
-    border-top: 4px solid var(--secondary) !important;
-    color: var(--secondary) !important;
+#notifInfo{
+    background-color: var(--mediumColor-150) !important;
+    color: var(--secondary);
+    font-weight: 500;
 }
-*/
-
 
 .btn-main, .btn-main:active, .btn-main:visited{
     background-color:  var(--primary) !important;
     font-weight: 600 !important;
+    color: var(--black);
+    font-weight: 600 !important;
+    text-decoration: none;
+    text-align: center;
 }
 
 .btn-main:hover{
     background-color: var(--primary-dark)  !important;
-    color: var(--white);
+    color: var(--white) !important;
 }
 
+.btn-cancel, btn-cancel:active, btn-cancel:visited{
+    background-color:  var(--secondary) !important;
+    font-weight: 600 !important;
+    color: var(--white) !important;
+    font-weight: 600 !important;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-cancel:hover{
+    background-color: var(--black) !important;
+    color: var(--grey) !important;
+}
+
+.btn-main-lg:hover{
+    background-color: var(--primary-dark)  !important;
+    color: var(--white) !important;
+}
 
 .btn-light100, .btn-light100:active, .btn-light100:visited {
     background-color: var(--lightColor-100) !important;
     font-weight: 600 !important;
+    color: var(--black);
+    font-weight: 600 !important;
+    text-decoration: none;
+    text-align: center;
 }
 
 .btn-light100:hover{
@@ -151,6 +158,10 @@ nav .navbar-nav li a:hover{
 .btn-medium100, .btn-medium100:active, .btn-medium100:visited {
     background-color: var(--mediumColor-100) !important;
     font-weight: 600 !important;
+    color: var(--black);
+    font-weight: 600 !important;
+    text-decoration: none;
+    text-align: center;
 }
 
 .btn-medium100:hover{
@@ -160,6 +171,14 @@ nav .navbar-nav li a:hover{
 
 .painel{
     background-color: var(--secondary);
+}
+
+.carousel img{
+    width: 950px;
+    height: 620px;
+    max-width: 100%;
+    max-height: 800px !important;
+    object-fit: cover;
 }
 
 .carousel-text{
@@ -173,6 +192,101 @@ nav .navbar-nav li a:hover{
 .carousel-text p{
     font-size: 20px;
 }
+
+.carouselCustom{
+    width: 900px !important;
+}
+
+.carouselCustom img{
+    width: 900px !important;
+    height: 600px;
+    max-width: 100%;
+    max-height: 600px !important;
+    object-fit: cover;
+}
+
+.price{
+    font-size: 26px;
+    text-align: end;
+    margin-right: -20px;
+    color: var(--primary) !important;
+    font-weight: 600;
+}
+
+.card-img{
+    width: 100%;
+    height: 100%;
+    max-width: 275.16px;
+    max-height: 166.67px;
+    object-fit: cover;
+}
+
+.customCard{
+    text-decoration: none;
+    color: var(--black) !important;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    transition: .5s ease;
+    opacity:0;
+    height: 100%;
+}
+
+.customCard:hover .overlay{
+    opacity: 1;
+}
+
+.customIcon{
+    color: var(--grey) !important;
+    padding-top: 125px;
+    padding-bottom: 125px;
+    margin-right: 5px;
+}
+
+.iconHover:hover{
+    color: var(--secondary) !important;
+}
+
+.customCheck:checked{
+    background-color: var(--secondary) !important;
+    border-color: var(--grey)!important;
+}
+
+.category, .category:active, .category:visited {
+    background-color: var(--lightColor-100) !important;
+    font-weight: 600 !important;
+    color: var(--black);
+    font-weight: 600 !important;
+    text-decoration: none;
+    text-align: center;
+    padding: 0.25rem;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.category:hover{
+    background-color: var(--lightColor-150) !important;
+    color: var(--white) !important;
+}
+
+.labelWarning{
+    color:#dc3545;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
