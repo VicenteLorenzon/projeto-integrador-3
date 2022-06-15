@@ -42,6 +42,11 @@
                               <div class="modal fade" id="dadosModal" tabindex="-1" aria-labelledby="dadosModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                   <div class="modal-content">
+                                    <form action = "{% url 'meus dados' %}" method="post">
+                                      {% csrf_token %}
+                                      {% for erro in erros %}
+                                      <p>{{ erro }}</p>
+                                      {% endfor %}  
                                     <div class="modal-header">
                                       <h5 class="modal-title" id="dadosModalLabel">Editar dados</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -50,44 +55,45 @@
                                         <div class="container">
                                             <div class="row">
                                               <div class="col">
-                                                <input type="text" class="form-control" placeholder="Nome" aria-label="Nome">
+                                                <input type="text" class="form-control" placeholder="Nome" aria-label="Nome" name="nome">
                                               </div>
                                               <div class="col">
-                                                <input type="text" class="form-control" placeholder="Sobrenome" aria-label="Sobrenome">
+                                                <input type="text" class="form-control" placeholder="Sobrenome" aria-label="Sobrenome" name="sobrenome">
                                               </div>
                                             </div>
                                             <div class="row pt-4">
                                               <div class="col">
-                                                <input type="email" class="form-control" placeholder="E-mail" aria-label="E-mail">
+                                                <input type="email" class="form-control" placeholder="E-mail" aria-label="E-mail" name="email">
                                               </div>
 
                                             </div>
                                             <div class="row pt-4">
                                               <div class="col">
-                                                <input type="text" class="form-control" id="cpf" placeholder="CPF" aria-label="CPF">
+                                                <input type="text" class="form-control" id="cpf" placeholder="CPF" aria-label="CPF" name="cpf" data-mask="000.000.000-00">
                                               </div>
                                             </div>
                                             <div class="row pt-4">
                                               <div class="col">
-                                                <input type="text" class="form-control" id="telefone" placeholder="Telefone" aria-label="Telefone">
+                                                <input type="text" class="form-control" id="telefone" placeholder="Telefone" aria-label="Telefone" name="telefone" data-mask="(00)00000-0000">
                                               </div>
                                             </div>
                                             <div class="row pt-4">
                                               <div class="col">
-                                                <input type="password" class="form-control" placeholder="Senha" aria-label="Senha">
+                                                <input type="password" class="form-control" placeholder="Senha" aria-label="Senha" name="senha">
                                               </div>
                                             </div>
                                             <div class="row pt-4">
                                               <div class="col">
-                                                <input type="password" class="form-control" placeholder="Confirmar senha" aria-label="Confirmar senha">
+                                                <input type="password" class="form-control" placeholder="Confirmar senha" aria-label="Confirmar senha" name="senha2">
                                               </div>
                                             </div>
                                           </div>
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancelar</button>
-                                      <button type="button" class="btn btn-main">Salvar</button>
+                                      <button type="submit" class="btn btn-main">Salvar</button>
                                     </div>
+                                    </form>
                                   </div>
                                 </div>
                               </div>
@@ -131,6 +137,11 @@
                             <div class="modal fade" id="enderecoModal" tabindex="-1" aria-labelledby="enderecoModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                   <div class="modal-content">
+                                    <form action = "{% url 'meus dados' %}" method="post">
+                                      {% csrf_token %}
+                                      {% for erro in erros %}
+                                      <p>{{ erro }}</p>
+                                      {% endfor %}  
                                     <div class="modal-header">
                                       <h5 class="modal-title" id="enderecoModalLabel">Adicionar endereço</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -139,33 +150,34 @@
                                         <div class="container">
                                             <div class="row">
                                               <div class="col">
-                                                <input type="text" class="form-control" id="CEP" placeholder="CEP" aria-label="CEP">
+                                                <input type="text" class="form-control" id="CEP" placeholder="CEP" aria-label="CEP" name="cep">
                                               </div>
                                             </div>
                                             <div class="row pt-4">
                                               <div class="col">
-                                                <input type="text" class="form-control" placeholder="Cidade" aria-label="Cidade">
+                                                <input type="text" class="form-control" placeholder="Cidade" aria-label="Cidade" name="cidade">
                                               </div>
                                             </div>
                                             <div class="row pt-4">
                                               <div class="col">
-                                                <input type="text" class="form-control" placeholder="Rua" aria-label="Rua">
+                                                <input type="text" class="form-control" placeholder="Rua" aria-label="Rua" name="rua">
                                               </div>
                                             </div>
                                             <div class="row pt-4">
                                               <div class="col-8">
-                                                <input type="text" class="form-control" placeholder="Complemento" aria-label="Complemento">
+                                                <input type="text" class="form-control" placeholder="Complemento" aria-label="Complemento" name="complemento">
                                               </div>
                                               <div class="col-4">
-                                                <input type="text" class="form-control" placeholder="Número" aria-label="Número">
+                                                <input type="text" class="form-control" placeholder="Número" aria-label="Número" name="numero">
                                               </div>
                                             </div>
                                           </div>
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancelar</button>
-                                      <button type="button" class="btn btn-main">Adicionar</button>
+                                      <button type="submit" class="btn btn-main">Adicionar</button>
                                     </div>
+                                    </form>
                                   </div>
                                 </div>
                               </div>
@@ -209,6 +221,11 @@
                             <div class="modal fade" id="cartaoModal" tabindex="-1" aria-labelledby="cartaoModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                   <div class="modal-content">
+                                    <form action = "{% url 'meus dados' %}" method="post">
+                                      {% csrf_token %}
+                                      {% for erro in erros %}
+                                      <p>{{ erro }}</p>
+                                      {% endfor %}  
                                     <div class="modal-header">
                                       <h5 class="modal-title" id="cartaoModalLabel">Adicionar cartão</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -217,31 +234,32 @@
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col">
-                                                  <input type="text" class="form-control" placeholder="Nome" aria-label="Nome">
+                                                  <input type="text" class="form-control" placeholder="Nome" aria-label="Nome" name="nome">
                                                 </div>
                                                 <div class="col">
-                                                  <input type="text" class="form-control" placeholder="Sobrenome" aria-label="Sobrenome">
+                                                  <input type="text" class="form-control" placeholder="Sobrenome" aria-label="Sobrenome" name="sobrenome">
                                                 </div>
                                             </div>
                                             <div class="row pt-4">
                                               <div class="col">
-                                                <input type="text" class="form-control" placeholder="Numero do cartão" aria-label="Numero do cartão">
+                                                <input type="text" class="form-control" placeholder="Numero do cartão" aria-label="Numero do cartão" name="numero_cartao">
                                               </div>
                                             </div>
                                             <div class="row pt-4">
                                                 <div class="col">
-                                                  <input type="text" class="form-control" placeholder="Data de expiração" aria-label="Data de expiração">
+                                                  <input type="text" class="form-control" placeholder="Data de expiração" aria-label="Data de expiração" name="data_expiracao">
                                                 </div>
                                                 <div class="col">
-                                                  <input type="text" class="form-control" placeholder="CVC" aria-label="CVC">
+                                                  <input type="text" class="form-control" placeholder="CVC" aria-label="CVC" name="cvc">
                                                 </div>
                                             </div>
                                           </div>
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancelar</button>
-                                      <button type="button" class="btn btn-main">Adicionar</button>
+                                      <button type="submit" class="btn btn-main">Adicionar</button>
                                     </div>
+                                    </form>
                                   </div>
                                 </div>
                               </div>
