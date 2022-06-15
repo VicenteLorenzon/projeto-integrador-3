@@ -96,6 +96,11 @@
             </div>
             <div class="col-3"></div>
           </div>
+          <form action = " {% url 'finalizar_compra' %" method="post">
+            {% csrf_token %}
+            {% for erro in erros %}
+            <p>{{ erro }}</p>
+            {% endfor %}  
           <div class="row pt-3">
             <div class="col-3"></div>
             <div class="col">
@@ -159,9 +164,10 @@
           </div> 
           <div class="row pt-3">
             <div class="col-7"></div>
-            <a type="button" class="btn col btn-main" href="#">Confirmar</a>
+            <button type="submit" class="btn col btn-main">Confirmar</button>
             <div class="col-3"></div>
-          </div>         
+          </div> 
+        </form>        
         </div>
         <!--quarta linha-->
         <div class="row mt-5">
