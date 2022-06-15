@@ -16,6 +16,11 @@
             <div class="col-3"></div>
           </div>
           <div class="container ms-3">
+            <form action="{% url 'confirmar_servico' %}" method="post">
+              {% csrf_token %}
+              {% for erro in erros %}
+              <p>{{ erro }}</p>
+              {% endfor %}
             <div class="row pt-3">
                 <div class="col-3"></div>
                 <div class="col">
@@ -113,9 +118,10 @@
               </div> 
               <div class="row pt-3">
                 <div class="col-7"></div>
-                <a type="button" class="btn col btn-main" href="#">Confirmar</a>
+                <button type="submit" class="btn col btn-main">Confirmar</button>
                 <div class="col-3"></div>
               </div>
+            </form>
           </div>             
         </div>
         <!--quarta linha-->
