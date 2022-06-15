@@ -20,107 +20,15 @@
             <div class="col">
                 <select class="form-select" aria-label="Default select example">
                     <option selected>Selecione seu pet</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    {% for pet in pets %}
+                    <option value="{{pet.id}}">{{pet.nome}}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="col-6"></div>
           </div>
-          <div class="row pb-2">
-              <div class="col-2"></div>
-              <div class="col">
-                <div class="card mb-3">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-row align-items-center">
-                          <div>
-                            <img
-                              src="dogpaw.png"
-                              class="img-fluid rounded-3" style="width: 65px;">
-                          </div>
-                          <div class="ms-3">
-                            <h5>Serviço</h5>
-                            <p class="small mb-0">Descrição</p>
-                          </div>
-                        </div>
-                        <div class="d-flex flex-row align-items-center">
-                          <div style="width: 120px;">
-                            <h5 class="mb-0">R$30,00</h5>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input customCheck" type="checkbox" id="autoSizingCheck2">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>              
-              </div>
-            <div class="col-2"></div>
-          </div>
-          <div class="row pb-2">
-            <div class="col-2"></div>
-            <div class="col">
-              <div class="card mb-3">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <div class="d-flex flex-row align-items-center">
-                        <div>
-                          <img
-                            src="dogpaw.png"
-                            class="img-fluid rounded-3" style="width: 65px;">
-                        </div>
-                        <div class="ms-3">
-                          <h5>Serviço</h5>
-                          <p class="small mb-0">Descrição</p>
-                        </div>
-                      </div>
-                      <div class="d-flex flex-row align-items-center">
-                        <div style="width: 120px;">
-                          <h5 class="mb-0">R$30,00</h5>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input customCheck" type="checkbox" id="autoSizingCheck2">
-                          </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>              
-            </div>
-          <div class="col-2"></div>
-        </div>
-        <div class="row">
-            <div class="col-2"></div>
-            <div class="col">
-              <div class="card mb-3">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <div class="d-flex flex-row align-items-center">
-                        <div>
-                          <img
-                            src="dogpaw.png"
-                            class="img-fluid rounded-3" style="width: 65px;">
-                        </div>
-                        <div class="ms-3">
-                          <h5>Serviço</h5>
-                          <p class="small mb-0">Descrição</p>
-                        </div>
-                      </div>
-                      <div class="d-flex flex-row align-items-center">
-                        <div style="width: 120px;">
-                          <h5 class="mb-0">R$30,00</h5>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input customCheck" type="checkbox" id="autoSizingCheck2">
-                          </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>              
-            </div>
-          <div class="col-2"></div>
-        </div>
-        <div class="row">
+          {% include 'partials/servicos.html' %}
+          <div class="row">
           <div class="col-2"></div>
           <div class="col">
               <hr class="mt-4">

@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render, get_list_or_404, get_object_or_40
 from django.http import HttpResponse, HttpRequest
 from .validations import campos_em_branco, senhas_iguais
 from django.contrib.auth.models import User
-from .models import Cliente, User, Produto
+from .models import Animal, Cliente, User, Produto, Servico
 from django.contrib import auth
 
 def index(request):
@@ -88,11 +88,12 @@ def produtos(request):
         produtos = Produto.objects.filter(produto__icontains= request.GET['search'])
     except:
         produtos = Produto.objects.all()
-        
+
     return render(request, 'produtos.html', {'produtos': produtos})
 
 def servicos(request):
-    return render(request, 'servicos.html')
+    pets = Animal.objects.filter(tutor__eq=User.id)
+    return render(request, 'servicos.html', {'contexto':{'pets': pets, 'servicos': 1}})
 
 
     
