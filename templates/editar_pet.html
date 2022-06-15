@@ -93,42 +93,48 @@
             </div>
             <div class="col-3"></div>
           </div>
+          <form action = "{% url 'editar_pet' %}" method="post">
+            {% csrf_token %}
+            {% for erro in erros %}
+            <p>{{ erro }}</p>
+            {% endfor %}
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-              <input type="email" class="form-control" placeholder="Nome" aria-label="Nome">
+              <input type="email" class="form-control" placeholder="Nome" aria-label="Nome" name="nome">
             </div>
             <div class="col-3"></div>
           </div>
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-              <input type="text" class="form-control" placeholder="Espécie" aria-label="Espécie">
+              <input type="text" class="form-control" placeholder="Espécie" aria-label="Espécie" name="especie">
             </div>
             <div class="col-3"></div>
           </div>
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-              <input type="text" class="form-control" placeholder="Raça" aria-label="Raça">
+              <input type="text" class="form-control" placeholder="Raça" aria-label="Raça" name="raca">
             </div>
             <div class="col-3"></div>
           </div>
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-              <input type="text" class="form-control" placeholder="Cor" aria-label="Cor">
+              <input type="text" class="form-control" placeholder="Cor" aria-label="Cor" name="cor">
             </div>
             <div class="col">
-              <input type="text" class="form-control" placeholder="Aniversário" aria-label="Aniversário">
+              <input type="text" class="form-control" placeholder="Aniversário" aria-label="Aniversário" name="aniversario">
             </div>
             <div class="col-3"></div>
           </div>
           <div class="row pt-5">
             <div class="col-7"></div>
-            <a type="button" class="btn col btn-main" href="#">Editar</a>
+            <button type="submit" class="btn col btn-main">Editar</button>
             <div class="col-3"></div>
           </div>
+          </form>
         </div>
         <!--quarta linha-->
         <div class="row mt-5">
