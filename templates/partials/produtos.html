@@ -1,16 +1,15 @@
+{% load static %}
 <div class="col">
   <a href="#" class="customCard">
     <div class="card h-100">
-      <img src="dogpaw.png" class="card-img-top card-img" alt="...">
+      <img src="{% static 'dogpaw.png' %}" class="card-img-top card-img" alt="...">
       <div class="overlay"></div>
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-          additional content. This content is a little bit longer.</p>
+        <h5 class="card-title">{{produto.produto}}</h5>
       </div>
       <div class="card-footer">
         <div class="container">
-          <div class="price">R$30,00</div>
+          <div class="price">R$ {{produto.preco}}</div>
         </div>
       </div>
     </div>

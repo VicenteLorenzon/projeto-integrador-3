@@ -17,6 +17,9 @@
           </div>
           <form action = "{% url 'login' %}" method="post">
           {% csrf_token %}
+          {% for erro in erros %}
+          <p>{{ erro }}</p>
+          {% endfor %}
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">

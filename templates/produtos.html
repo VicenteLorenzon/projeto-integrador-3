@@ -15,9 +15,9 @@
             </div>
           </div>
           <div class="col-3 me-5">
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Procurar por um produto" aria-label="Search">
-              <a class="btn btn-main" type="submit">Procurar</a>
+            <form class="d-flex" action="{% url 'produtos' %}" method="get">
+              <input class="form-control me-2" type="search" placeholder="Procurar por um produto" aria-label="Search" name="search">
+              <button class="btn btn-main" type="submit">Procurar</button>
             </form>
           </div>
         </div>
@@ -25,7 +25,9 @@
         <div class="row">
           <div class="row row-cols-1 row-cols-md-3 row-cols-lg-6 g-4 px-5">
             <!--primeira carta-->
+            {% for produto in produtos %}
             {% include 'partials/produtos.html' %}
+            {% endfor %}
           </div>
         </div>
         <!--quarta linha-->
