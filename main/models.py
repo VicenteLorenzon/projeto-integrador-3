@@ -75,6 +75,7 @@ class Venda(models.Model):
     valor_total = models.DecimalField(decimal_places=2, max_digits=12)
 
 class Autorizacao(models.Model):
+    servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
     especie = models.ForeignKey(Especie, on_delete=models.CASCADE)
     raca = models.ForeignKey(Raca, on_delete=models.CASCADE)
-    autoriza = models.CharField(max_length=1)
+    autoriza = models.BooleanField()

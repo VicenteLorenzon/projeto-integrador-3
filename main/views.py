@@ -8,7 +8,8 @@ from .models import Animal, Cliente, User, Produto, Servico
 from django.contrib import auth
 
 def index(request):
-    return render(request, 'index.html')
+    produtos = Produto.objects.all()
+    return render(request, 'index.html', {'produtos': produtos})
 
 def adicionar_pet(request):
     return render(request, 'adicionar_pet.html')
