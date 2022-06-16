@@ -282,6 +282,11 @@ nav .navbar-nav li a:hover{
     color: #6c757d !important;
 }
 
+.trashButton{
+    background: transparent;
+    border: none !important;
+}
+
 
 
 
