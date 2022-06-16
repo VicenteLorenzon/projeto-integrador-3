@@ -18,12 +18,12 @@
           <div class="row py-4">
             <div class="col-2"></div>
             <div class="col">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Selecione seu pet</option>
-                    {% for pet in pets %}
-                    <option value="{{pet.id}}">{{pet.nome}}</option>
+                <select class="form-select" aria-label="Default select example" name="pet">
+                    {% for pet in contexto.pets %}
+                    <option value="1"><a href="1">{{pet.nome}}</a></option>
                     {% endfor %}
                 </select>
+              <form>
             </div>
             <div class="col-6"></div>
           </div>

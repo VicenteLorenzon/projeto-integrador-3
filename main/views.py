@@ -1,11 +1,12 @@
 from imp import reload
 from wsgiref.util import request_uri
 from django.shortcuts import redirect, render, get_list_or_404, get_object_or_404
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 from .validations import campos_em_branco, senhas_iguais
 from django.contrib.auth.models import User
 from .models import Animal, Cliente, User, Produto, Servico
 from django.contrib import auth
+from django.views.generic.base import RedirectView
 
 def index(request):
     produtos = Produto.objects.all()
@@ -25,7 +26,10 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('meus_dados')
+            if request.user.is_staff:
+                return HttpResponseRedirect('/admin/')
+            else:
+                return redirect('meus_dados')
         else:
             mensagens_erro.append('E-mail e senha não combinam')
         return render(request, 'login.html', {'erros': mensagens_erro})
@@ -93,8 +97,9 @@ def produtos(request):
     return render(request, 'produtos.html', {'produtos': produtos})
 
 def servicos(request):
-    pets = Animal.objects.filter(tutor__eq=User.id)
-    return render(request, 'servicos.html', {'contexto':{'pets': pets, 'servicos': 1}})
+    pets = Animal.objects.filter(tutor=request.user.id)
+    servicos=1
+    return render(request, 'servicos.html', {'contexto':{'pets': pets, 'servicos': servicos}})
 
 
     

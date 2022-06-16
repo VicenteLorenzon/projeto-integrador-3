@@ -42,7 +42,7 @@
                               <div class="modal fade" id="dadosModal" tabindex="-1" aria-labelledby="dadosModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                   <div class="modal-content">
-                                    <form action = "{% url 'meus dados' %}" method="post">
+                                    <form action = "{% url 'meus_dados' %}" method="post">
                                       {% csrf_token %}
                                       {% for erro in erros %}
                                       <p>{{ erro }}</p>
@@ -137,7 +137,7 @@
                             <div class="modal fade" id="enderecoModal" tabindex="-1" aria-labelledby="enderecoModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                   <div class="modal-content">
-                                    <form action = "{% url 'meus dados' %}" method="post">
+                                    <form action = "{% url 'meus_dados' %}" method="post">
                                       {% csrf_token %}
                                       {% for erro in erros %}
                                       <p>{{ erro }}</p>
@@ -221,7 +221,7 @@
                             <div class="modal fade" id="cartaoModal" tabindex="-1" aria-labelledby="cartaoModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                   <div class="modal-content">
-                                    <form action = "{% url 'meus dados' %}" method="post">
+                                    <form action = "{% url 'meus_dados' %}" method="post">
                                       {% csrf_token %}
                                       {% for erro in erros %}
                                       <p>{{ erro }}</p>

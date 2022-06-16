@@ -35,6 +35,7 @@ class Raca(models.Model):
     raca = models.CharField(max_length=30)
 
 class Animal(models.Model):
+    nome = models.CharField(max_length=25)
     tutor = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     especie = models.ForeignKey(Especie, on_delete=models.CASCADE)
     raca = models.ForeignKey(Raca, on_delete=models.CASCADE)
