@@ -8,3 +8,7 @@ urlpatterns = [
     path('', include('main.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+#CUSTOMIZAÇÕES DO ADMIN PADRÃO
+admin.site.site_header = 'Administração do pet shop'
+admin.site.index_title = 'Administração do pet shop'
+admin.site.site_title = 'Administração do pet shop'
