@@ -6,6 +6,9 @@ class User_Dados(models.Model):
     cpf = models.CharField(max_length=14)
     telefone = models.CharField(max_length=15)
     osbervacao = models.TextField(max_length=200)
+    def __str__(self):
+        usuario = User.objects.get(id=self.user)
+        return str(self.user) ' - ' + usuario.first_name + ' ' + usuario.last_name
 
 class Cartao(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -14,6 +17,8 @@ class Cartao(models.Model):
     numero = models.CharField(max_length=19)
     validade = models.DateField()
     cvv = models.PositiveSmallIntegerField()
+    def __str__(self):
+        return self.numero
 
 class Endereco(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -21,13 +26,19 @@ class Endereco(models.Model):
     rua = models.CharField(max_length=75)
     complemento = models.CharField(max_length=75)
     numero = models.PositiveSmallIntegerField()
+    def __str__(self):
+        return self.rua + ' ' + str(self.numero)
     
 class Especie(models.Model):
     especie = models.CharField(max_length=30)
+    def __str__(self):
+        return self.especie
 
 class Raca(models.Model):
     especie = models.ForeignKey(Especie, on_delete=models.CASCADE)
     raca = models.CharField(max_length=30)
+    def __str__(self):
+        return self.raca
 
 class Animal(models.Model):
     nome = models.CharField(max_length=25)
@@ -37,23 +48,33 @@ class Animal(models.Model):
     cor = models.CharField(max_length=30)
     aniversario = models.DateField()
     foto = models.ImageField(upload_to='pets')
+    def __str__(self):
+        usuario = User.objects.get(id=self.user)
+        return self.nome + ' - ' + usuario.first_name + ' ' + usuario.last_name
 
 class Produto(models.Model):
     produto = models.CharField(max_length=75)
     preco = models.DecimalField(decimal_places=2, max_digits=12)
     estoque = models.IntegerField()
     foto = models.ImageField(upload_to='produtos')
+    def __str__(self):
+        return self.produto
 
 class Carrinho(models.Model):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     quantidade = models.IntegerField()
     valor_unit = models.DecimalField(decimal_places=2, max_digits=12)
+    def __str__(self):
+        usuario = User.objects.get(id=self.user)
+        return usuario.first_name + ' ' + usuario.last_name + ' - ' + Produto.objects.get(id=self.produto).produto
 
 class Servico(models.Model):
     servico = models.CharField(max_length=75)
     preco = models.DecimalField(decimal_places=2, max_digits=12)
     foto = models.ImageField(upload_to='servicos')
+    def __str__(self):
+        return self.servico
 
 class Solicitacao(models.Model):
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
@@ -63,6 +84,8 @@ class Solicitacao(models.Model):
     forma_entrada = models.CharField(max_length=1)
     forma_saida = models.CharField(max_length=1)
     valor = models.DecimalField(decimal_places=2, max_digits=12)
+    def __str__(self):
+        return self.animal + ' - ' + self.servico + ' - ' + str(self.data)
 
 class Venda(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -72,9 +95,13 @@ class Venda(models.Model):
     forma_entrega = models.CharField(max_length=1)
     quantidade = models.IntegerField()
     valor_total = models.DecimalField(decimal_places=2, max_digits=12)
+    def __str__(self):
+        return self.user + ' - ' + self.produto + ' - ' + str(self.data)
 
 class Servico_Animal_Disponibilidade(models.Model):
     servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
     especie = models.ForeignKey(Especie, on_delete=models.CASCADE)
     raca = models.ForeignKey(Raca, on_delete=models.CASCADE)
     disponivel = models.BooleanField()
+    def __str__(self):
+        return 'Aut. ' + Servico.objects.get(id=self.servico).servico + ' - ' + Raca.objects.get(id=self.raca).raca
