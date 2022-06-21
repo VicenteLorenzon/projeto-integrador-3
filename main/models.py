@@ -36,13 +36,13 @@ class Animal(models.Model):
     raca = models.ForeignKey(Raca, on_delete=models.CASCADE)
     cor = models.CharField(max_length=30)
     aniversario = models.DateField()
-    foto = models.ImageField(upload_to='media')
+    foto = models.ImageField(upload_to='pets')
 
 class Produto(models.Model):
     produto = models.CharField(max_length=75)
     preco = models.DecimalField(decimal_places=2, max_digits=12)
     estoque = models.IntegerField()
-    foto = models.ImageField(upload_to='media')
+    foto = models.ImageField(upload_to='produtos')
 
 class Carrinho(models.Model):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
@@ -53,7 +53,7 @@ class Carrinho(models.Model):
 class Servico(models.Model):
     servico = models.CharField(max_length=75)
     preco = models.DecimalField(decimal_places=2, max_digits=12)
-    foto = models.ImageField(upload_to='media')
+    foto = models.ImageField(upload_to='servicos')
 
 class Solicitacao(models.Model):
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
