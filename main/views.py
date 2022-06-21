@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render, get_list_or_404, get_object_or_40
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 from .validations import campos_em_branco, senhas_iguais
 from django.contrib.auth.models import User
-from .models import Animal, Cliente, User, Produto, Servico
+from .models import Animal, User_Dados, User, Produto, Servico
 from django.contrib import auth
 from django.views.generic.base import RedirectView
 
@@ -53,7 +53,7 @@ def cadastro(request):
             return render(request, 'cadastro.html', {'erros': mensagens_erro})
         else:
             pessoa = User.objects.create_user(username=email, first_name=nome, last_name=sobrenome, email=email, password=senha)
-            dados_pessoa = Cliente.objects.create(user=pessoa, cpf=cpf, telefone=telefone)
+            dados_pessoa = User_Dados.objects.create(user=pessoa, cpf=cpf, telefone=telefone)
             pessoa.save()
             dados_pessoa.save()
             return redirect('login')
@@ -97,7 +97,7 @@ def produtos(request):
     return render(request, 'produtos.html', {'produtos': produtos})
 
 def servicos(request):
-    pets = Animal.objects.filter(tutor=request.user.id)
+    pets = Animal.objects.filter(user=request.user.id)
     servicos=1
     return render(request, 'servicos.html', {'contexto':{'pets': pets, 'servicos': servicos}})
 
