@@ -1,5 +1,5 @@
 <div class="col">
-    <a href="editarPet.html" class="customCard">
+    <a href="{% url 'editar_pet' id=pet.id %}" class="customCard">
         <div class="card h-100">
             <img src="{{ pet.foto.url }}" class="card-img-top card-img" alt="...">
             <div class="overlay"></div>
