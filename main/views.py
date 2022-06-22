@@ -64,8 +64,9 @@ def carrinho(request):
     return render(request, 'carrinho.html')
 
 def mandar_carrinho(request, produto):
-    item = Carrinho(user=request.user.id, produto=Produto.objects.get(id=produto), quantidade=1, valor_unit=Produto.objects.get(id=produto).preco)
-    redirect('carrinho')
+    item = Carrinho(user=request.user, produto=Produto.objects.get(id=produto), quantidade=1, valor_unit=Produto.objects.get(id=produto).preco)
+    item.save()
+    return redirect('carrinho')
 
 def confirmar_servico(request):
     return render(request, 'confirmar_servico.html')

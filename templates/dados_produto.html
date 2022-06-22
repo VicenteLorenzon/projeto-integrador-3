@@ -36,7 +36,7 @@
                       </div> 
                       <div class="row p-4">
                           <div class="col-9" style="height: 25px;"></div>
-                          <a type="button" class="btn col btn-main py-3" href="finalizarCompra.html">Mandar para o carrinho</a>
+                          <a type="button" class="btn col btn-main py-3" href="{% url 'mandar_carrinho' produto=produto.id %}">Mandar para o carrinho</a>
                       </div>  
                 </div>
             </div>
