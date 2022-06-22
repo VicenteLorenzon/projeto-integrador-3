@@ -2,7 +2,7 @@
 <div class="col">
   <a href="{% url 'produto' id=produto.id %}" class="customCard">
     <div class="card h-100">
-      <img src="{% static 'dogpaw.png' %}" class="card-img-top card-img" alt="...">
+      <img src="{{ produto.foto.url }}" class="card-img-top card-img" alt="...">
       <div class="overlay"></div>
       <div class="card-body">
         <h5 class="card-title">{{produto.produto}}</h5>

@@ -1,10 +1,10 @@
 <div class="col">
     <a href="editarPet.html" class="customCard">
         <div class="card h-100">
-            <img src="dogpaw.png" class="card-img-top card-img" alt="...">
+            <img src="{{ pet.foto.url }}" class="card-img-top card-img" alt="...">
             <div class="overlay"></div>
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">{{ pet.nome }}</h5>
                 <p class="card-text">This is a wider card with supporting text below as a
                     natural lead-in to
                     additional content. This content is a little bit longer.</p>

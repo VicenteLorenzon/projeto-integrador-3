@@ -8,12 +8,12 @@
                 <div>
                   <a href="#">
                     <img
-                    src="dogpaw.png"
+                    src="{{ produto.foto.url }}"
                     class="img-fluid rounded-3" style="width: 65px;">
                   </a> 
                 </div>
                 <div class="ms-3">
-                  <h5>Item carrinho</h5>
+                  <h5>{{ produto.produto }}</h5>
                   <p class="small mb-0">Descrição</p>
                 </div>
               </div>
@@ -22,7 +22,7 @@
                   <h5 class="fw-normal mb-0">2</h5>
                 </div>
                 <div style="width: 120px;">
-                  <h5 class="mb-0">R$30,00</h5>
+                  <h5 class="mb-0">{{ produto.preco }}</h5>
                 </div>
                 <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt iconHover"></i></a>
               </div>
