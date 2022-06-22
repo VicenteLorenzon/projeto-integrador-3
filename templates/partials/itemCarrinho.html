@@ -8,20 +8,20 @@
                 <div>
                   <a href="#">
                     <img
-                    src="{{ item.foto.url }}"
+                    src="{{ item.produto.foto.url }}"
                     class="img-fluid rounded-3" style="width: 65px;">
                   </a> 
                 </div>
                 <div class="ms-3">
-                  <h5>{{ item.produto }}</h5>
+                  <h5>{{ item.produto.produto }}</h5>
                 </div>
               </div>
               <div class="d-flex flex-row align-items-center">
                 <div style="width: 50px;">
-                  <h5 class="fw-normal mb-0">2</h5>
+                  <h5 class="fw-normal mb-0">{{ item.quantidade }}</h5>
                 </div>
                 <div style="width: 120px;">
-                  <h5 class="mb-0">{{ item.preco }}</h5>
+                  <h5 class="mb-0">{{ item.valor_unit }}</h5>
                 </div>
                 <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt iconHover"></i></a>
               </div>

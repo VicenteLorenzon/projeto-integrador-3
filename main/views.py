@@ -61,7 +61,8 @@ def cadastro(request):
         return render(request, 'cadastro.html')
 
 def carrinho(request):
-    return render(request, 'carrinho.html')
+    itens = Carrinho.objects.filter(user=request.user.id)
+    return render(request, 'carrinho.html', context={'carrinho': itens})
 
 def mandar_carrinho(request, produto):
     item = Carrinho(user=request.user, produto=Produto.objects.get(id=produto), quantidade=1, valor_unit=Produto.objects.get(id=produto).preco)
