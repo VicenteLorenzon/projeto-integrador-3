@@ -7,11 +7,10 @@ class User_Dados(models.Model):
     telefone = models.CharField(max_length=15)
     osbervacao = models.TextField(max_length=200)
     class Meta:
-        verbose_name = _("Dados de usuário")
-        verbose_name_plural = _("Dados dos usuários")
+        verbose_name = "Dados de usuário"
+        verbose_name_plural = "Dados dos usuários"
     def __str__(self):
-        usuario = User.objects.get(id=self.user)
-        return str(self.user) ' - ' + usuario.first_name + ' ' + usuario.last_name
+        return str(self.user.id) + ' - ' + self.user.first_name + ' ' + self.user.last_name
 
 class Cartao(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -21,8 +20,8 @@ class Cartao(models.Model):
     validade = models.DateField()
     cvv = models.PositiveSmallIntegerField()
     class Meta:
-        verbose_name = _("Cartão")
-        verbose_name_plural = _("Cartões")
+        verbose_name = "Cartão"
+        verbose_name_plural = "Cartões"
     def __str__(self):
         return self.numero
 
@@ -33,16 +32,16 @@ class Endereco(models.Model):
     complemento = models.CharField(max_length=75)
     numero = models.PositiveSmallIntegerField()
     class Meta:
-        verbose_name = _("Endereço")
-        verbose_name_plural = _("Endereços")
+        verbose_name = "Endereço"
+        verbose_name_plural = "Endereços"
     def __str__(self):
         return self.rua + ' ' + str(self.numero)
     
 class Especie(models.Model):
     especie = models.CharField(max_length=30)
     class Meta:
-        verbose_name = _("Espécie")
-        verbose_name_plural = _("Espécies")
+        verbose_name = "Espécie"
+        verbose_name_plural = "Espécies"
     def __str__(self):
         return self.especie
 
@@ -50,8 +49,8 @@ class Raca(models.Model):
     especie = models.ForeignKey(Especie, on_delete=models.CASCADE)
     raca = models.CharField(max_length=30)
     class Meta:
-        verbose_name = _("Raça")
-        verbose_name_plural = _("Raças")
+        verbose_name = "Raça"
+        verbose_name_plural = "Raças"
     def __str__(self):
         return self.raca
 
@@ -64,11 +63,10 @@ class Animal(models.Model):
     aniversario = models.DateField()
     foto = models.ImageField(upload_to='pets')
     class Meta:
-        verbose_name = _("Animal")
-        verbose_name_plural = _("Animais")
+        verbose_name = "Animal"
+        verbose_name_plural = "Animais"
     def __str__(self):
-        usuario = User.objects.get(id=self.user)
-        return self.nome + ' - ' + usuario.first_name + ' ' + usuario.last_name
+        return self.nome + ' - ' + self.user.first_name + ' ' + self.user.last_name
 
 class Produto(models.Model):
     produto = models.CharField(max_length=75)
@@ -76,8 +74,8 @@ class Produto(models.Model):
     estoque = models.IntegerField()
     foto = models.ImageField(upload_to='produtos')
     class Meta:
-        verbose_name = _("Produto")
-        verbose_name_plural = _("Produtos")
+        verbose_name = "Produto"
+        verbose_name_plural = "Produtos"
     def __str__(self):
         return self.produto
 
@@ -87,19 +85,18 @@ class Carrinho(models.Model):
     quantidade = models.IntegerField()
     valor_unit = models.DecimalField(decimal_places=2, max_digits=12)
     class Meta:
-        verbose_name = _("Carrinho")
-        verbose_name_plural = _("Carrinhos")
+        verbose_name = "Carrinho"
+        verbose_name_plural = "Carrinhos"
     def __str__(self):
-        usuario = User.objects.get(id=self.user)
-        return usuario.first_name + ' ' + usuario.last_name + ' - ' + Produto.objects.get(id=self.produto).produto
+        return self.user.first_name + ' ' + self.user.last_name + ' - ' + Produto.objects.get(id=self.produto.id).produto
 
 class Servico(models.Model):
     servico = models.CharField(max_length=75)
     preco = models.DecimalField(decimal_places=2, max_digits=12)
     foto = models.ImageField(upload_to='servicos')
     class Meta:
-        verbose_name = _("Serviço")
-        verbose_name_plural = _("Serviços")
+        verbose_name = "Serviço"
+        verbose_name_plural = "Serviços"
     def __str__(self):
         return self.servico
 
@@ -116,8 +113,8 @@ class Solicitacao(models.Model):
                                                      ('C', 'Concluído, pet já em casa'), 
                                                      ('D', 'Concluído, aguardando retirada do pet')])
     class Meta:
-        verbose_name = _("Solicitação")
-        verbose_name_plural = _("Solicitações")
+        verbose_name = "Solicitação"
+        verbose_name_plural = "Solicitações"
     def __str__(self):
         return self.animal + ' - ' + self.servico + ' - ' + str(self.data)
 
@@ -130,8 +127,8 @@ class Venda(models.Model):
     quantidade = models.IntegerField()
     valor_total = models.DecimalField(decimal_places=2, max_digits=12)
     class Meta:
-        verbose_name = _("Venda")
-        verbose_name_plural = _("Vendas")
+        verbose_name = "Venda"
+        verbose_name_plural = "Vendas"
     def __str__(self):
         return self.user + ' - ' + self.produto + ' - ' + str(self.data)
 
@@ -141,7 +138,7 @@ class Servico_Animal_Disponibilidade(models.Model):
     raca = models.ForeignKey(Raca, on_delete=models.CASCADE)
     disponivel = models.BooleanField()
     class Meta:
-        verbose_name = _("Disponibilidade de serviço")
-        verbose_name_plural = _("Disponibilidades de serviço")
+        verbose_name = "Disponibilidade de serviço"
+        verbose_name_plural = "Disponibilidades de serviço"
     def __str__(self):
-        return 'Aut. ' + Servico.objects.get(id=self.servico).servico + ' - ' + Raca.objects.get(id=self.raca).raca
+        return 'Aut. ' + Servico.objects.get(id=self.servico.id).servico + ' - ' + Raca.objects.get(id=self.raca.id).raca
