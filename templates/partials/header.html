@@ -36,7 +36,7 @@
                 <div class="header-btn">
                     <ul class="navbar-nav m-auto">
                       <li class="nav-item">
-                        <button type="button" class="btn ms-2" data-bs-toggle="modal" data-bs-target="#carrinhoModal"><i class="fa-solid fa-cart-shopping fa-2x"></i></button>
+                        <a href="{% url 'carrinho' %}" type="button" class="btn ms-2" data-bs-toggle="modal" data-bs-target="#carrinhoModal"><i class="fa-solid fa-cart-shopping fa-2x"></i></a>
                       </li> 
                       <li class="nav-item dropdown">
                         <button type="button" class="btn ms-2" id="navbrDropdown" role="button" data-bs-toggle="dropdown"
@@ -78,118 +78,4 @@
             </div>
         </div>
     </nav>
-    <div class="modal fade" id="carrinhoModal" tabindex="-1" aria-labelledby="carrinhoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="carrinhoModalLabel">Carrinho</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                  <div class="row pb-2">
-                    <div class="col">
-                      <div class="card mb-3">
-                          <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                              <div class="d-flex flex-row align-items-center">
-                                <div>
-                                  <a href="{% url 'index' %}">
-                                    <img
-                                    src="{% static 'dogpaw.png' %}"
-                                    class="img-fluid rounded-3" style="width: 65px;">
-                                  </a> 
-                                </div>
-                                <div class="ms-3">
-                                  <h5>Item carrinho</h5>
-                                </div>
-                              </div>
-                              <div class="d-flex flex-row align-items-center">
-                                <div style="width: 120px;">
-                                  <h5 class="mb-0 ps-3">R$30,00</h5>
-                                </div>
-                                <button class="trashButton"><i class="fas fa-trash-alt iconHover" style="color: #cecece;"></i></button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>              
-                    </div>
-                </div>
-                <div class="row pb-2">
-                    <div class="col">
-                      <div class="card mb-3">
-                          <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                              <div class="d-flex flex-row align-items-center">
-                                <div>
-                                  <a href="{% url 'index' %}">
-                                    <img
-                                    src="{% static 'dogpaw.png' %}"
-                                    class="img-fluid rounded-3" style="width: 65px;">
-                                  </a> 
-                                </div>
-                                <div class="ms-3">
-                                  <h5>Item carrinho</h5>
-                                </div>
-                              </div>
-                              <div class="d-flex flex-row align-items-center">
-                                <div style="width: 120px;">
-                                  <h5 class="mb-0 ps-3">R$30,00</h5>
-                                </div>
-                                <button class="trashButton"><i class="fas fa-trash-alt iconHover" style="color: #cecece;"></i></button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>              
-                    </div>
-                </div>
-                <div class="row pb-2">
-                    <div class="col">
-                      <div class="card mb-3">
-                          <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                              <div class="d-flex flex-row align-items-center">
-                                <div>
-                                  <a href="{% url 'index' %}">
-                                    <img
-                                    src="{% static 'dogpaw.png' %}"
-                                    class="img-fluid rounded-3" style="width: 65px;">
-                                  </a> 
-                                </div>
-                                <div class="ms-3">
-                                  <h5>Item carrinho</h5>
-                                </div>
-                              </div>
-                              <div class="d-flex flex-row align-items-center">
-                                <div style="width: 120px;">
-                                  <h5 class="mb-0 ps-3">R$30,00</h5>
-                                </div>
-                                <button class="trashButton"><i class="fas fa-trash-alt iconHover" style="color: #cecece;"></i></button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>              
-                    </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                      <hr class="mt-4">
-                  </div>
-                </div>
-                <div class="row pt-1">
-                  <div class="col-8">
-                      <h3>Total</h3>
-                  </div>
-                  <div class="col ps-4">
-                      <h3>R$90,00</h3>
-                  </div>
-                </div> 
-                  </div>
-            </div>
-            <div class="modal-footer">
-              <a type="button" class="btn btn-main" href="{% url 'carrinho' %}">Prosseguir compra</a>
-            </div>
-          </div>
-        </div>
-      </div>
 </header>
