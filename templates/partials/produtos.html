@@ -1,6 +1,6 @@
 {% load static %}
 <div class="col">
-  <a href="{% url 'produto/{{produto.id}}' %}" class="customCard">
+  <a href="{% url 'produto/'+{{ produto.id }} %}" class="customCard">
     <div class="card h-100">
       <img src="{% static 'dogpaw.png' %}" class="card-img-top card-img" alt="...">
       <div class="overlay"></div>
