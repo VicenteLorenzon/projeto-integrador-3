@@ -66,7 +66,7 @@ def carrinho(request):
 def confirmar_servico(request):
     return render(request, 'confirmar_servico.html')
 
-def pag_produto(request, id):
+def produto(request, id):
     prod = Produto.objects.get(id=id)
     return render(request, 'dados_produto.html', {'produto': prod})
 
