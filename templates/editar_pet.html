@@ -101,39 +101,41 @@
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-              <input type="email" class="form-control" placeholder="Nome" aria-label="Nome" name="nome">
+              <input type="text" class="form-control" placeholder="Nome" aria-label="Nome" name="nome" value={{ pet.nome }}>
             </div>
             <div class="col-3"></div>
           </div>
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-              <input type="text" class="form-control" placeholder="Espécie" aria-label="Espécie" name="especie">
+              <input type="text" class="form-control" placeholder="Espécie" aria-label="Espécie" name="especie" value={{ pet.especie }}>
             </div>
             <div class="col-3"></div>
           </div>
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-              <input type="text" class="form-control" placeholder="Raça" aria-label="Raça" name="raca">
+              <input type="text" class="form-control" placeholder="Raça" aria-label="Raça" name="raca" value={{ pet.raca }}>
             </div>
             <div class="col-3"></div>
           </div>
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-              <input type="text" class="form-control" placeholder="Cor" aria-label="Cor" name="cor">
+              <input type="text" class="form-control" placeholder="Cor" aria-label="Cor" name="cor" value={{ pet.cor }}>
             </div>
             <div class="col">
-              <input type="text" class="form-control datePlaceholder" placeholder="Data de aniversário" onfocus="(this.type='date')" aria-label="Aniversário" name="aniversario">
+              <input type="text" class="form-control datePlaceholder" placeholder="Data de aniversário" onfocus="(this.type='date')" aria-label="Aniversário" name="aniversario"  value={{ pet.aniversario }}>
             </div>
             <div class="col-3"></div>
           </div>
-          <div class="row pt-5">
-            <div class="col-7"></div>
-            <button type="submit" class="btn col btn-main">Editar</button>
+          <div class="row pt-4">
             <div class="col-3"></div>
-          </div>
+            <div class="col">
+              <input type="image" class="form-control" placeholder="Imagem" aria-label="imagem" name="imagem" value={{ pet.raca }}>
+            </div>
+            <div class="col-3"></div>
+          </div>                  
           </form>
         </div>
         <!--quarta linha-->
