@@ -63,6 +63,10 @@ def cadastro(request):
 def carrinho(request):
     return render(request, 'carrinho.html')
 
+def mandar_carrinho(request, produto):
+    item = Carrinho(user=request.user.id, produto=Produto.objects.get(id=produto), quantidade=1, valor_unit=Produto.objects.get(id=produto).preco)
+    redirect('carrinho')
+
 def confirmar_servico(request):
     return render(request, 'confirmar_servico.html')
 
