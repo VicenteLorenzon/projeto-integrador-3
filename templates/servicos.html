@@ -18,16 +18,20 @@
           <div class="row py-4">
             <div class="col-2"></div>
             <div class="col">
-                <select class="form-select" aria-label="Default select example" name="pet">
+              <form action="{% url 'servicos' %}", method="get">
+                <select class="form-select" name="pet" onchange="this.form.submit()">
+                    <option value="0">Selecione o pet</option>
                     {% for pet in contexto.pets %}
-                    <option value="1"><a href="1">{{pet.nome}}</a></option>
+                    <option value="{{ pet.id }}">{{pet.nome}}</option>
                     {% endfor %}
                 </select>
               <form>
             </div>
             <div class="col-6"></div>
           </div>
+          {% for servico in contexto.servicos %}
           {% include 'partials/servicos.html' %}
+          {% endfor %}
           <div class="row">
           <div class="col-2"></div>
           <div class="col">
@@ -36,14 +40,6 @@
           <div class="col-2"></div>
         </div>
         <div class="row pt-1">
-          <div class="col-2"></div>
-          <div class="col">
-              <h3>Total</h3>
-          </div>
-          <div class="col-1 me-4">
-              <h3>R$60,00</h3>
-          </div>
-          <div class="col-2"></div>
         </div> 
         <div class="row p-4">
             <div class="col-8"></div>
