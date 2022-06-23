@@ -15,7 +15,7 @@
             </div>
             <div class="col-3"></div>
           </div>
-          <form action = "{% url 'editar_pet' id=pet.id %}" method="post">
+          <form action = "{% url 'editar_pet' id=pet.id %}" method="post" enctype='mulipart/form-data'>
             {% csrf_token %}
             {% for erro in erros %}
             <p>{{ erro }}</p>
