@@ -15,7 +15,7 @@
             </div>
             <div class="col-3"></div>
           </div>
-          <form action = "{% url 'editar_pet' id=pet.id %}" method="post" enctype='mulipart/form-data'>
+          <form action="{% url 'editar_pet' id=contexto.pet.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% for erro in erros %}
             <p>{{ erro }}</p>
@@ -23,18 +23,20 @@
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-              <input type="text" class="form-control" placeholder="Nome" aria-label="Nome" name="nome" value={{ pet.nome }}>
+              <input type="text" class="form-control" placeholder="Nome" aria-label="Nome" name="nome" value="{{ contexto.pet.nome }}">
             </div>
             <div class="col-3"></div>
           </div>
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Espécie</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <select class="form-select" aria-label="Default select example" name="especie">
+                  <option value="{{ contexto.pet.raca.id }}">{{ contexto.pet.especie.especie }}</option> 
+                  {% for especie in contexto.especies %}
+                  {% if contexto.pet.especie.id != especie.id %}
+                  <option value="{{ especie.id }}">{{ especie.especie }}</option>
+                  {% endif %} 
+                  {% endfor %}
                 </select>
             </div>
             <div class="col-3"></div>
@@ -42,11 +44,13 @@
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Raça</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <select class="form-select" aria-label="Default select example" name="raca">
+                  <option value="{{ contexto.pet.raca.id }}">{{ contexto.pet.raca.raca }}</option> 
+                  {% for raca in contexto.racas %}
+                  {% if contexto.pet.raca.id != raca.id %}
+                  <option value="{{ raca.id }}">{{ raca.raca }}</option>
+                  {% endif %} 
+                  {% endfor %}
                 </select>
             </div>
             <div class="col-3"></div>
@@ -54,18 +58,18 @@
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-              <input type="text" class="form-control" placeholder="Cor" aria-label="Cor" name="cor" value={{ pet.cor }}>
+              <input type="text" class="form-control" placeholder="Cor" aria-label="Cor" name="cor" value="{{ contexto.pet.cor }}">
             </div>
             <div class="col">
-              <input type="text" class="form-control datePlaceholder" placeholder="Data de aniversário" onfocus="(this.type='date')" aria-label="Aniversário" name="aniversario"  value={{ pet.aniversario }}>
+              <input type="date" value="{{contexto.pet.aniversario|date:'Y-m-d' }}" class="form-control datePlaceholder" placeholder="Aniversário" aria-label="Aniversário" name="aniversario">
             </div>
             <div class="col-3"></div>
           </div>
           <div class="row pt-3">
             <div class="col-3"></div>
             <div class="col">
-              <label for="fotoPet" class="pb-1 ps-1">Escolha uma foto para seu pet</label>
-              <input type="file" class="form-control" placeholder="Foto" id="fotoPet">
+              <label for="fotoPet" class="pb-1 ps-1">Alterar foto do pet</label>
+              <input name="foto" type="file" class="form-control" placeholder="Foto" id="fotoPet">
             </div>
             <div class="col-3"></div>
           </div>

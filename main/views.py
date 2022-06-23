@@ -12,6 +12,7 @@ from .models import *
 from django.contrib import auth
 from django.views.generic.base import RedirectView
 from datetime import date
+import os
 
 def index(request):
     produtos = Produto.objects.all()
@@ -77,10 +78,13 @@ def meus_pets(request):
     return render(request, 'meus_pets.html', {'pets': pets})
 
 def adicionar_pet(request): #FALTA AJUSTAR TEMPLATE
-    if request.method == 'get':
-        return render(request, 'adicionar_pet.html')  
+    if request.method == 'GET':
+        especies = Especie.objects.all()
+        racas = Raca.objects.all()
+        return render(request, 'adicionar_pet.html', context={'contexto':{'especies': especies, 'racas': racas}})  
 
-    elif request.method == 'post':
+    elif request.method == 'POST':
+        print(request.FILES)
         pet = Animal(
             nome = request.POST['nome'].strip(),
             user = request.user,
@@ -88,17 +92,20 @@ def adicionar_pet(request): #FALTA AJUSTAR TEMPLATE
             raca = Raca.objects.get(id=request.POST['raca']),
             cor = request.POST['cor'].strip(),
             aniversario = request.POST['aniversario'],
-            foto = request.POST['foto']
+            foto = request.FILES['foto']
         )
         pet.save()
+        return redirect('meus_pets')
 
-def editar_pet(request, id): #FALTA AJUSTAR TEMPLATE
+def editar_pet(request, id):
     pet = Animal.objects.get(id=id)
     if request.user != pet.user:
         return HttpResponseForbidden
 
     elif request.method == 'GET':
-        return render(request, 'editar_pet.html', {'pet': pet})
+        especies = Especie.objects.all()
+        racas = Raca.objects.all()
+        return render(request, 'editar_pet.html', context={'contexto':{'especies': especies, 'racas': racas, 'pet': pet}})
 
     elif request.method == 'POST':
         pet.nome = request.POST['nome'].strip()
@@ -106,7 +113,10 @@ def editar_pet(request, id): #FALTA AJUSTAR TEMPLATE
         pet.raca = Raca.objects.get(id=request.POST['raca'])
         pet.cor = request.POST['cor'].strip()
         pet.aniversario = request.POST['aniversario']
-        pet.foto = request.POST['foto']
+        try:
+            pet.foto = request.FILES['foto']
+        except:
+            pass
         pet.save()
         return redirect('meus_pets')
 
