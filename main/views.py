@@ -185,6 +185,6 @@ def servicos(request): #FALTA TERMINAR
             return HttpResponseForbidden()
         raca = Animal.objects.get(id=pet).raca
         servicos = Servico_Animal_Disponibilidade.objects.filter(raca=raca, disponivel=True)
-        return render(request, 'servicos.html', {'contexto':{'pets': pets, 'servicos': servicos, 'nome_pet': 'Serviços disponíves - '+ Animal.objects.get(id=pet).nome}})
+        return render(request, 'servicos.html', {'contexto':{'pets': pets, 'servicos': servicos, 'nome_pet': 'Selecione serviços - '+ Animal.objects.get(id=pet).nome}})
     except:
         return render(request, 'servicos.html', {'contexto':{'pets': pets}})

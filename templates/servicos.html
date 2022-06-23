@@ -42,12 +42,12 @@
           <div class="row pt-5">
             <div class="col-3"></div>
             <div class="col">
-              <h1>Confirmar serviÃ§o</h1>
+              <h1>Confirmar serviço</h1>
             </div>
             <div class="col-3"></div>
           </div>
           <div class="container ms-3">
-            <form action="{% url 'confirmar_servico' %}" method="post">
+            <form action="{% url 'servicos' %}" method="post">
               {% csrf_token %}
               {% for erro in erros %}
               <p>{{ erro }}</p>
@@ -55,7 +55,7 @@
             <div class="row pt-2">
                 <div class="col-3"></div>
                 <div class="col">
-                  <h4>Como deseja que seu pet vÃ¡ para o petshop?</h4>
+                  <h4>Como deseja que seu pet vá para o petshop?</h4>
                 </div>
                 <div class="col-3"></div>
               </div>
@@ -140,7 +140,7 @@
         </div> 
         <div class="row p-4">
             <div class="col-8"></div>
-            <a type="button" class="btn col btn-main" href=" ">Confirmar serviços</a>
+            <a type="button" class="btn col btn-main" href="">Confirmar serviços</a>
             <div class="col-2"></div>
           </div>      
         <!--quarta linha-->
