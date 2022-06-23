@@ -129,7 +129,7 @@ def tirar_carrinho(request, item):
 
 def finalizar_compra(request):
     carrinho_user = Carrinho.objects.filter(user=request.user.id)
-    if request.method == 'get':
+    if request.method == 'GET':
         enderecos = Endereco.objects.filter(user=request.user.id)
         preco = 0
         for item in carrinho_user:
@@ -137,7 +137,7 @@ def finalizar_compra(request):
             preco += valor_item
         return render(request, 'finalizar_compra.html', context={'contexto':{'enderecos': enderecos, 'preco': preco}})
 
-    elif request.method == 'post':
+    elif request.method == 'POST':
         forma_entrega = request.POST['forma_entrega']
         endereco = request.POST['endereco']
         for item in carrinho_user:
