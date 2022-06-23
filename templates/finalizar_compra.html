@@ -25,13 +25,13 @@
             <div class="col">
                 <div class="col-sm-10">
                     <div class="form-check">
-                      <input class="form-check-input customCheck" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                      <input class="form-check-input customCheck" type="radio" name="forma_entrega" id="gridRadios1" value="P" checked>
                       <label class="form-check-label customLabelRadio" for="gridRadios1">
                         Receber em casa
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input customCheck" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                      <input class="form-check-input customCheck" type="radio" name="forma_entrega" id="gridRadios2" value="C">
                       <label class="form-check-label customLabelRadio" for="gridRadios2">
                         Retirar na loja
                       </label>
@@ -43,11 +43,11 @@
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Forma de pagamento</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <select class="form-select" aria-label="Default select example", name="forma_pagamento">
+                    <option value="0" selected>Forma de pagamento</option>
+                    <option value="1">Dinheiro</option>
+                    <option value="2">Pix</option>
+                    <option value="3">Cart„o</option>
                 </select>
             </div>
             <div class="col-3"></div>
@@ -55,11 +55,10 @@
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Endere√ßo</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <select class="form-select" aria-label="Default select example", name="endereco">
+                  {% for endereco in contexto.enderecos %}
+                    <option value="{{ endereco.id }}">{{ endereco.rua }}, {{ endereco.numero }} - {{ endereco.cep }} </option>
+                  {% endfor %}  
                 </select>
             </div>
             <div class="col-3"></div>
@@ -77,7 +76,7 @@
                 <h3>Total</h3>
             </div>
             <div class="col-2 me-4">
-                <h3>R$90,00</h3>
+                <h3>R${{ contexto.preco }}</h3>
             </div>
             <div class="col-2"></div>
           </div> 

@@ -33,13 +33,13 @@
                 <div class="col">
                     <div class="col-sm-10">
                         <div class="form-check">
-                          <input class="form-check-input customCheck" type="radio" name="gridRadios1" id="gridRadios1-1" value="option1" checked>
+                          <input class="form-check-input customCheck" type="radio" name="forma_entrada" id="gridRadios1-1" value="C" checked>
                           <label class="form-check-label customLabelRadio" for="gridRadios1">
                             Quero levar meu pet
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input customCheck" type="radio" name="gridRadios1" id="gridRadios1-2" value="option2">
+                          <input class="form-check-input customCheck" type="radio" name="forma_saida" id="gridRadios1-2" value="P">
                           <label class="form-check-label customLabelRadio" for="gridRadios2">
                             Quero que busquem meu pet
                           </label>
@@ -60,13 +60,13 @@
                 <div class="col">
                     <div class="col-sm-10">
                         <div class="form-check">
-                          <input class="form-check-input customCheck" type="radio" name="gridRadios2" id="gridRadios2-1" value="option1" checked>
+                          <input class="form-check-input customCheck" type="radio" name="forma_saida" id="gridRadios2-1" value="C" checked>
                           <label class="form-check-label customLabelRadio" for="gridRadios1">
                             Quero buscar meu pet
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input customCheck" type="radio" name="gridRadios2" id="gridRadios2-2" value="option2">
+                          <input class="form-check-input customCheck" type="radio" name="forma_saida" id="gridRadios2-2" value="P">
                           <label class="form-check-label customLabelRadio" for="gridRadios2">
                             Quero que tragam meu pet
                           </label>
@@ -79,10 +79,10 @@
                 <div class="col-3"></div>
                 <div class="col">
                     <select class="form-select" aria-label="Default select example">
-                        <option selected>Forma de pagamento</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                      <option value="0" selected>Forma de pagamento</option>
+                      <option value="1">Dinheiro</option>
+                      <option value="2">Pix</option>
+                      <option value="3">Cart„o</option>
                     </select>
                 </div>
                 <div class="col-3"></div>
@@ -91,10 +91,9 @@
                 <div class="col-3"></div>
                 <div class="col">
                     <select class="form-select" aria-label="Default select example">
-                        <option selected>Endere√ßo</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                      {% for endereco in contexto.enderecos %}
+                      <option value="{{ endereco.id }}">{{ endereco.rua }}, {{ endereco.numero }} - {{ endereco.cep }} </option>
+                      {% endfor %}  
                     </select>
                 </div>
                 <div class="col-3"></div>
@@ -112,7 +111,7 @@
                     <h3>Total</h3>
                 </div>
                 <div class="col-2 me-4">
-                    <h3>R$60,00</h3>
+                    <h3>R${{ contexto.preco }}</h3>
                 </div>
                 <div class="col-2"></div>
               </div> 
