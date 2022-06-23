@@ -23,7 +23,7 @@
                 <div style="width: 120px;">
                   <h5 class="mb-0">{{ item.valor_unit }}</h5>
                 </div>
-                <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt iconHover"></i></a>
+                <a href="{% url 'tirar_carrinho' item=item.id %}" style="color: #cecece;"><i class="fas fa-trash-alt iconHover"></i></a>
               </div>
             </div>
           </div>

@@ -29,6 +29,13 @@
             </div>
             <div class="col-6"></div>
           </div>
+          <div class="row pt-5">
+            <div class="col-2"></div>
+            <div class="col">
+              <h4>{{ contexto.nome_pet }}</h4>
+            </div>
+            <div class="col-3"></div>
+          </div>
           {% for servico in contexto.servicos %}
           {% include 'partials/servicos.html' %}
           {% endfor %}

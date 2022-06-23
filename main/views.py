@@ -72,6 +72,10 @@ def mandar_carrinho(request, produto):
     item.save()
     return redirect('carrinho')
 
+def tirar_carrinho(request, item):
+    i = Carrinho.objects.get(id=item).delete()
+    return redirect('carrinho')
+
 def confirmar_servico(request):
     return render(request, 'confirmar_servico.html')
 
@@ -125,7 +129,7 @@ def servicos(request):
         if Animal.objects.get(id=pet).user != request.user:
             return HttpResponseForbidden()
         raca = Animal.objects.get(id=pet).raca
-        servicos= Servico_Animal_Disponibilidade.objects.filter(raca=raca, disponivel=True)
-        return render(request, 'servicos.html', {'contexto':{'pets': pets, 'servicos': servicos}})
+        servicos = Servico_Animal_Disponibilidade.objects.filter(raca=raca, disponivel=True)
+        return render(request, 'servicos.html', {'contexto':{'pets': pets, 'servicos': servicos, 'nome_pet': 'Serviços disponíves - '+ Animal.objects.get(id=pet).nome}})
     except:
         return render(request, 'servicos.html', {'contexto':{'pets': pets}}) 
