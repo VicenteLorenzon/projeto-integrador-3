@@ -17,8 +17,8 @@
           </div>
           <form action="{% url 'adicionar_pet' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {% for erro in erros %}
-            <p>{{ erro }}</p>
+            {% for erro in contexto.erros %}
+            <p>{% include 'partials/warning.html' %}</p>
             {% endfor %}
           <div class="row pt-4">
             <div class="col-3"></div>

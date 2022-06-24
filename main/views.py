@@ -4,6 +4,7 @@ from threading import excepthook
 from urllib.error import URLError
 from wsgiref.util import request_uri
 from xmlrpc.client import DateTime
+from django.forms import ValidationError
 from django.shortcuts import redirect, render, get_list_or_404, get_object_or_404
 from django.http import HttpResponse, HttpRequest, HttpResponseForbidden, HttpResponseRedirect
 from .validations import campos_em_branco, senhas_iguais
@@ -70,32 +71,47 @@ def logout(request):
     auth.logout(request)
     return redirect('index')
 
-def meus_dados(request): #FALTA TUDO
+def meus_dados(request):
     return render(request, 'meus_dados.html')
 
 def meus_pets(request):
     pets = Animal.objects.filter(user=request.user.id)
     return render(request, 'meus_pets.html', {'pets': pets})
 
-def adicionar_pet(request): #FALTA AJUSTAR TEMPLATE
+def adicionar_pet(request):
     if request.method == 'GET':
         especies = Especie.objects.all()
         racas = Raca.objects.all()
         return render(request, 'adicionar_pet.html', context={'contexto':{'especies': especies, 'racas': racas}})  
 
     elif request.method == 'POST':
-        print(request.FILES)
-        pet = Animal(
-            nome = request.POST['nome'].strip(),
-            user = request.user,
-            especie = Especie.objects.get(id=request.POST['especie']),
-            raca = Raca.objects.get(id=request.POST['raca']),
-            cor = request.POST['cor'].strip(),
-            aniversario = request.POST['aniversario'],
+        erros = []
+        nome = request.POST['nome'].strip(),
+        user = request.user,
+        especie = Especie.objects.get(id=request.POST['especie']),
+        raca = Raca.objects.get(id=request.POST['raca']),
+        cor = request.POST['cor'].strip(),
+        aniversario = request.POST['aniversario'],
+        try:
             foto = request.FILES['foto']
-        )
-        pet.save()
-        return redirect('meus_pets')
+        except: foto = ''
+        campos_em_branco([nome, user, especie, raca, cor, aniversario, foto], erros)
+        if len(erros) == 0:
+            pet = Animal(
+                nome = nome,
+                user = user,
+                especie = especie,
+                raca = raca,
+                cor = cor,
+                aniversario = aniversario,
+                foto = foto
+            )
+            pet.save()
+            return redirect('meus_pets')
+        else:
+            especies = Especie.objects.all()
+            racas = Raca.objects.all()
+            return render(request, 'adicionar_pet.html', context={'contexto':{'especies': especies, 'racas': racas, 'erros': erros}})
 
 def editar_pet(request, id):
     pet = Animal.objects.get(id=id)
@@ -139,6 +155,8 @@ def tirar_carrinho(request, item):
 
 def finalizar_compra(request):
     carrinho_user = Carrinho.objects.filter(user=request.user.id)
+    if len(carrinho_user) == 0:
+        return HttpResponseForbidden
     if request.method == 'GET':
         enderecos = Endereco.objects.filter(user=request.user.id)
         preco = 0
@@ -151,15 +169,18 @@ def finalizar_compra(request):
         forma_entrega = request.POST['forma_entrega']
         endereco = request.POST['endereco']
         for item in carrinho_user:
+            produto = item.produto
             venda = Venda(
                 user=request.user,
-                produto=item.produto,
+                produto=produto,
                 data=date.today(),
                 endereco=Endereco.objects.get(id=endereco),
                 forma_entrega=forma_entrega,
                 quantidade=item.quantidade,
                 valor_total=(item.quantidade * item.valor_unit)
             )
+            produto.estoque = produto - item.quantidade
+            produto.save()
             venda.save()
 
         carrinho_user.delete()
@@ -177,7 +198,7 @@ def produtos(request):
 
     return render(request, 'produtos.html', {'produtos': produtos})
 
-def servicos(request): #FALTA TERMINAR
+def servicos(request):
     enderecos = Endereco.objects.filter(user=request.user.id)
     pets = Animal.objects.filter(user=request.user.id)
     if request.method == 'GET':

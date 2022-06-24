@@ -18,7 +18,7 @@
           <form action = "{% url 'cadastro' %}" method="post">
           {% csrf_token %}
           {% for erro in erros %}
-          <p>{{ erro }}</p>
+          <p>{% include 'partials/warning.html' %}</p>
           {% endfor %}
           <div class="row pt-4">
             <div class="col-3"></div>

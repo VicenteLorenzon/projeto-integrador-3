@@ -1,10 +1,11 @@
 from django.contrib import admin
 from .models import *
-from .forms import Adicionar_pet
+from .forms import *
 
 class User_Dados_admin(admin.ModelAdmin):
     list_display = ('user', 'cpf', 'telefone', )
     list_display_links = ('user', 'cpf', 'telefone', )
+    form = Dados_form
 
 class Cartao_admin(admin.ModelAdmin):
     list_display = ('id', 'numero', 'nome', 'sobrenome')
@@ -13,6 +14,7 @@ class Cartao_admin(admin.ModelAdmin):
 class Endereco_admin(admin.ModelAdmin):
     list_display = ('id', 'rua', 'numero', 'cep', )
     list_display_links = ('id', )
+    form = Endereco_form
 
 class Especie_admin(admin.ModelAdmin):
     list_display = ('id', 'especie', )

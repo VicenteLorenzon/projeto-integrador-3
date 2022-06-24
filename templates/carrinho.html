@@ -15,6 +15,7 @@
             </div>
             <div class="col-3"></div>
           </div>
+        {% if carrinho %}
           {% for item in carrinho %}
           {% include 'partials/itemCarrinho.html' %}
           {% endfor %}
@@ -31,7 +32,16 @@
             <div class="col-8"></div>
             <a type="button" class="btn col btn-main" href="{% url 'finalizar_compra' %}">Finalizar compra</a>
             <div class="col-2"></div>
-        </div>      
+        </div>
+        {% else %}
+        <div class="row pt-1">
+          <div class="col-3"></div>
+          <div class="col labelWarning">
+            Você ainda não tem itens no carrinho
+          </div>
+          <div class="col-3"></div>
+        </div>
+        {% endif %}      
         <!--quarta linha-->
         {% include 'partials/footer.html' %}
       </div>
