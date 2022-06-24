@@ -47,7 +47,7 @@
                         </button>
                         <ul class="dropdown-menu p-3 dropdown-menu-end" aria-labelledby="navbarDropdown" id="notifMenu">
                         {% for solicitacao in solicitacoes %}
-                          <li><a id="notifInfo" href="{% url 'index' %}">{{ solicitacao.servico.servico }} - {{ solicitacao.animal.nome }}, status: {{ solicitacao.status }}</a></li>
+                          <li><a id="notifInfo" href="{% url 'index' %}">{{ solicitacao.servico.servico }} - {{ solicitacao.animal.nome }}, status: {{ solicitacao.status. }}</a></li>
                           <div class="dropdown-divider"></div>
                         {% endfor %}
                         </ul>
