@@ -16,19 +16,15 @@ class Endereco_admin(admin.ModelAdmin):
     list_display_links = ('id', )
     form = Endereco_form
 
-class Especie_admin(admin.ModelAdmin):
-    list_display = ('id', 'especie', )
-    list_display_links = ('id', 'especie', )
-
 class Raca_admin(admin.ModelAdmin):
-    list_display = ('id', 'raca', 'especie', )
+    list_display = ('id', 'raca', )
     list_display_links = ('id', 'raca', )
 
 class Animal_admin(admin.ModelAdmin):
-    list_display = ('id', 'nome', 'user', 'especie', 'raca', )
+    list_display = ('id', 'nome', 'user', 'raca', )
     list_display_links = ('id', 'nome', )
     search_fields = ('nome', )
-    list_filter = ('especie', 'raca', 'user', )
+    list_filter = ('raca', 'user', )
 
 class Produto_admin(admin.ModelAdmin):
     list_display = ('id', 'produto', 'preco', 'estoque', )
@@ -41,7 +37,7 @@ class Servico_admin(admin.ModelAdmin):
     search_fields = ('servico', )
 
 class Solicitacao_admin(admin.ModelAdmin):
-    list_display = ('id', 'animal', 'servico', 'status')
+    list_display = ('id', 'animal', 'servico', 'status', 'horario')
     list_display_links = ('id', 'animal', 'servico', )
     search_fields = ('animal', 'servico', )
 
@@ -58,7 +54,6 @@ class Servico_Animal_Disponibilidade_admin(admin.ModelAdmin):
 admin.site.register(User_Dados, User_Dados_admin)
 admin.site.register(Cartao, Cartao_admin)
 admin.site.register(Endereco, Endereco_admin)
-admin.site.register(Especie, Especie_admin)
 admin.site.register(Raca, Raca_admin)
 admin.site.register(Animal, Animal_admin)
 admin.site.register(Produto, Produto_admin)

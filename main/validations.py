@@ -16,8 +16,25 @@ def campos_em_branco(campos, lista):
 
 def valida_cep_normal(cep, lista):
     if re.search(r'[0-9]{5}-[0-9]{3}', cep) == None:
-        lista.append('CEP Inv�lido')
+        lista.append('CEP Invalido')
 
+def valida_cpf_normal(raw_cpf, lista):
+    cpf = [int(char) for char in raw_cpf if char.isdigit()]
+
+    if len(cpf) != 11:
+        lista.append('CPF Inválido')
+        return
+
+    if cpf == cpf[::-1]:
+        lista.append('CPF Inválido')
+        return
+
+    for i in range(9, 11):
+        value = sum((cpf[num] * ((i+1) - num) for num in range(0, i)))
+        digit = ((value * 10) % 11) % 10
+        if digit != cpf[i]:
+            lista.append('CPF Inválido')
+            return
 
 #VALIDADORES ADMIN
 

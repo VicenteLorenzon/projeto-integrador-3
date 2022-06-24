@@ -17,8 +17,12 @@ import os
 
 def index(request):
     produtos = Produto.objects.all()
-    return render(request, 'index.html', {'produtos': produtos})
-
+    try:
+        solicitacoes = Solicitacao.objects.filter(animal__in = Animal.objects.filter(user=request.user))
+        
+        return render(request, 'index.html', {'produtos': produtos, 'solicitacoes': solicitacoes})
+    except:
+        return render(request, 'index.html', {'produtos': produtos})
 def perguntas_frequentes(request):
     return render(request, 'perguntas_frequentes.html')
 
@@ -71,6 +75,12 @@ def logout(request):
     auth.logout(request)
     return redirect('index')
 
+def excluir_endereco(request, id):
+    if request.user != Endereco.objects.get(pk=id).user:
+        return HttpResponseForbidden
+    Endereco.objects.get(pk=id).delete()
+    return redirect('meus_dados')
+
 def adicionar_endereco(request):
     if request.method == 'POST':
         mensagens_erro = []
@@ -83,11 +93,11 @@ def adicionar_endereco(request):
         campos_em_branco([cep, cidade, rua, complemento, numero], mensagens_erro)
         valida_cep_normal(cep, mensagens_erro)
         if(len(mensagens_erro) > 0):
-            return HttpResponseRedirect('meus_dados', headers={'erro': 'true'})
+            return redirect('meus_dados')
         else:
             endereco = Endereco(
+                user = request.user,
                 cep=cep, 
-                cidade=cidade, 
                 rua=rua, 
                 complemento=complemento, 
                 numero=numero)
@@ -95,13 +105,40 @@ def adicionar_endereco(request):
             return redirect('meus_dados')
 
 def editar_dados(request):
-    pass
+    if request.method == 'POST':
+        mensagens_erro = []
+        nome = request.POST['nome'].strip()
+        sobrenome = request.POST['sobrenome'].strip()
+        email = request.POST['email'].strip()
+        cpf = request.POST['cpf'].strip()
+        telefone = request.POST['telefone'].strip()
+
+        campos_em_branco([nome, sobrenome, email, cpf, telefone], mensagens_erro)
+        valida_cpf_normal(cpf, mensagens_erro)
+        if(len(mensagens_erro) > 0):
+            return redirect('meus_dados')
+        else:
+            user = request.user
+            dados = User_Dados.objects.get(pk=request.user.id)
+            dados.cpf = cpf
+            dados.telefone = telefone
+            user.first_name = nome
+            user.last_name = sobrenome
+            user.username = email
+            user.email = email
+
+            user.save()
+            dados.save()
+            return redirect('meus_dados')
 
 def meus_dados(request):
-    if request.GET['erro']:
-        return render(request, 'meus_dados.html', {'erros': 'Formulário preenchido incorretamente'})
-    else:
-        return render(request, 'meus_dados.html')
+    return render(request, 'meus_dados.html', context={
+        'contexto': {
+            'enderecos': Endereco.objects.filter(user=request.user),
+            'user':request.user,
+            'dados':User_Dados.objects.get(pk=request.user.id)
+        }
+    })
 
 def meus_pets(request):
     pets = Animal.objects.filter(user=request.user.id)
@@ -109,38 +146,34 @@ def meus_pets(request):
 
 def adicionar_pet(request):
     if request.method == 'GET':
-        especies = Especie.objects.all()
         racas = Raca.objects.all()
-        return render(request, 'adicionar_pet.html', context={'contexto':{'especies': especies, 'racas': racas}})  
+        return render(request, 'adicionar_pet.html', context={'contexto':{'racas': racas}})  
 
     elif request.method == 'POST':
         erros = []
         nome = request.POST['nome'].strip(),
         user = request.user,
-        especie = Especie.objects.get(id=request.POST['especie']),
         raca = Raca.objects.get(id=request.POST['raca']),
         cor = request.POST['cor'].strip(),
         aniversario = request.POST['aniversario'],
         try:
             foto = request.FILES['foto']
         except: foto = ''
-        campos_em_branco([nome, user, especie, raca, cor, aniversario, foto], erros)
+        campos_em_branco([nome, user, raca, cor, aniversario, foto], erros)
         if len(erros) == 0:
             pet = Animal(
-                nome = nome,
-                user = user,
-                especie = especie,
-                raca = raca,
-                cor = cor,
-                aniversario = aniversario,
+                nome = request.POST['nome'].strip(),
+                user = request.user,
+                raca = Raca.objects.get(id=request.POST['raca']),
+                cor = request.POST['cor'].strip(),
+                aniversario = request.POST['aniversario'],
                 foto = foto
             )
             pet.save()
             return redirect('meus_pets')
         else:
-            especies = Especie.objects.all()
             racas = Raca.objects.all()
-            return render(request, 'adicionar_pet.html', context={'contexto':{'especies': especies, 'racas': racas, 'erros': erros}})
+            return render(request, 'adicionar_pet.html', context={'contexto':{'racas': racas, 'erros': erros}})
 
 def editar_pet(request, id):
     pet = Animal.objects.get(id=id)
@@ -148,13 +181,11 @@ def editar_pet(request, id):
         return HttpResponseForbidden
 
     elif request.method == 'GET':
-        especies = Especie.objects.all()
         racas = Raca.objects.all()
-        return render(request, 'editar_pet.html', context={'contexto':{'especies': especies, 'racas': racas, 'pet': pet}})
+        return render(request, 'editar_pet.html', context={'contexto':{'racas': racas, 'pet': pet}})
 
     elif request.method == 'POST':
         pet.nome = request.POST['nome'].strip()
-        pet.especie = Especie.objects.get(id=request.POST['especie'])
         pet.raca = Raca.objects.get(id=request.POST['raca'])
         pet.cor = request.POST['cor'].strip()
         pet.aniversario = request.POST['aniversario']

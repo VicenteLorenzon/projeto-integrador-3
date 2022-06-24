@@ -36,17 +36,8 @@ class Endereco(models.Model):
         verbose_name_plural = "Endereços"
     def __str__(self):
         return self.rua + ' ' + str(self.numero)
-    
-class Especie(models.Model):
-    especie = models.CharField(max_length=30)
-    class Meta:
-        verbose_name = "Espécie"
-        verbose_name_plural = "Espécies"
-    def __str__(self):
-        return self.especie
 
 class Raca(models.Model):
-    especie = models.ForeignKey(Especie, on_delete=models.CASCADE)
     raca = models.CharField(max_length=30)
     class Meta:
         verbose_name = "Raça"
@@ -57,7 +48,6 @@ class Raca(models.Model):
 class Animal(models.Model):
     nome = models.CharField(max_length=25)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    especie = models.ForeignKey(Especie, on_delete=models.CASCADE)
     raca = models.ForeignKey(Raca, on_delete=models.CASCADE)
     cor = models.CharField(max_length=30)
     aniversario = models.DateField()
@@ -116,7 +106,7 @@ class Solicitacao(models.Model):
         verbose_name = "Solicitação"
         verbose_name_plural = "Solicitações"
     def __str__(self):
-        return self.animal + ' - ' + self.servico + ' - ' + str(self.data)
+        return self.animal.nome + ' - ' + self.servico.servico + ' - ' + str(self.horario)
 
 class Venda(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -130,11 +120,10 @@ class Venda(models.Model):
         verbose_name = "Venda"
         verbose_name_plural = "Vendas"
     def __str__(self):
-        return self.user + ' - ' + self.produto + ' - ' + str(self.data)
+        return self.user.first_name + ' - ' + self.produto.produto + ' - ' + str(self.data)
 
 class Servico_Animal_Disponibilidade(models.Model):
     servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
-    especie = models.ForeignKey(Especie, on_delete=models.CASCADE)
     raca = models.ForeignKey(Raca, on_delete=models.CASCADE)
     disponivel = models.BooleanField()
     class Meta:

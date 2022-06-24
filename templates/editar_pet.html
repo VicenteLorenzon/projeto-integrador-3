@@ -30,20 +30,6 @@
           <div class="row pt-4">
             <div class="col-3"></div>
             <div class="col">
-                <select class="form-select" aria-label="Default select example" name="especie">
-                  <option value="{{ contexto.pet.raca.id }}">{{ contexto.pet.especie.especie }}</option> 
-                  {% for especie in contexto.especies %}
-                  {% if contexto.pet.especie.id != especie.id %}
-                  <option value="{{ especie.id }}">{{ especie.especie }}</option>
-                  {% endif %} 
-                  {% endfor %}
-                </select>
-            </div>
-            <div class="col-3"></div>
-          </div>
-          <div class="row pt-4">
-            <div class="col-3"></div>
-            <div class="col">
                 <select class="form-select" aria-label="Default select example" name="raca">
                   <option value="{{ contexto.pet.raca.id }}">{{ contexto.pet.raca.raca }}</option> 
                   {% for raca in contexto.racas %}

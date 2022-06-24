@@ -7,7 +7,7 @@
     <div>
       <!--inicio container-->
       {% for erro in erros %}
-      <p>{% include partials/warning.html %}</p>
+      <p>{% include 'partials/warning.html' %}</p>
       {% endfor %}
       <div class="container-fluid">
         <div class="container">
@@ -26,7 +26,7 @@
                       <div class="justify-content-between">
                         <div>
                           <div class="ms-3">
-                            <h5>Dados b�sicos</h4>
+                            <h5>Dados basicos</h4>
                                 <div class="container"> 
                                     <h6 class="col-11 mb-2">Nome: {{ contexto.user.first_name }}</h6>            
                                     <h6 class="mb-2">Sobrenome: {{ contexto.user.last_name }}</h6>
@@ -59,7 +59,7 @@
                                                 <input type="text" class="form-control" placeholder="Nome" aria-label="Nome" name="nome" value="{{ contexto.user.first_name }}">
                                               </div>
                                               <div class="col">
-                                                <input type="text" class="form-control" placeholder="Sobrenome" aria-label="Sobrenome" name="sobrenome" value="{{ contexto.user.lat_name }}">
+                                                <input type="text" class="form-control" placeholder="Sobrenome" aria-label="Sobrenome" name="sobrenome" value="{{ contexto.user.last_name }}">
                                               </div>
                                             </div>
                                             <div class="row pt-4">
@@ -103,12 +103,12 @@
                     <div class="justify-content-between">
                       <div>
                         <div class="ms-3">
-                          <h5>Endere�os</h4>
+                          <h5>Endereços</h4>
                               <div class="container"> 
                                 {% for endereco in contexto.enderecos %}
                                 <div class="row">
                                     <h6 class="col mb-2">{{ endereco.rua }}, {{ endereco.numero }} - {{ endereco.cep }}</h6>  
-                                    <div class="col ms-4 d-flex justify-content-end"><button class="trashButton" href="{{ url 'excluir_endereco' endereco.id }}"><i class="fas fa-trash-alt iconHover" style="color: #cecece;"></i></button></div>
+                                    <div class="col ms-4 d-flex justify-content-end"><a href="{% url 'excluir_endereco' endereco.id %}"><button class="trashButton"><i class="fas fa-trash-alt iconHover" style="color: #cecece;"></i></button></a></div>
                                 </div>
                                 {% endfor %}
                               </div>
@@ -128,7 +128,7 @@
                                     <form action = "{% url 'adicionar_endereco' %}" method="post">
                                       {% csrf_token %} 
                                     <div class="modal-header">
-                                      <h5 class="modal-title" id="enderecoModalLabel">Adicionar endere�o</h5>
+                                      <h5 class="modal-title" id="enderecoModalLabel">Adicionar endereço</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -153,87 +153,8 @@
                                                 <input type="text" class="form-control" placeholder="Complemento" aria-label="Complemento" name="complemento">
                                               </div>
                                               <div class="col-4">
-                                                <input type="text" class="form-control" placeholder="N�mero" aria-label="N�mero" name="numero">
+                                                <input type="text" class="form-control" placeholder="Número" aria-label="Número" name="numero" data-mask="0000">
                                               </div>
-                                            </div>
-                                          </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancelar</button>
-                                      <button type="submit" class="btn btn-main">Adicionar</button>
-                                    </div>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                        </div>
-                      </div>  
-                    </div>                          
-                  </div>
-                </div>              
-            </div>
-          <div class="col-2"></div>
-        </div>
-        <div class="row pb-2">
-            <div class="col-2"></div>
-            <div class="col">
-              <div class="card mb-3">
-                  <div class="card-body">
-                    <div class="justify-content-between">
-                      <div>
-                        <div class="ms-3">
-                          <h5>Forma de pagamento</h4>
-                              <div class="container"> 
-                                <div class="row">
-                                    <h6 class="col mb-2">Cartão 1:</h6>  
-                                    <div class="col ms-4 d-flex justify-content-end"><button class="trashButton"><i class="fas fa-trash-alt iconHover" style="color: #cecece;"></i></button></div>
-                                </div>
-                                <div class="row">
-                                    <h6 class="col mb-2">Cartão 2:</h6>  
-                                    <div class="col ms-4 d-flex justify-content-end"><button class="trashButton"><i class="fas fa-trash-alt iconHover" style="color: #cecece;"></i></button></div>
-                                </div>
-                              </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="container">
-                      <div class="row">
-                          <div class="col-9"></div>
-                          <div class="col">
-                            <button type="button" class="btn btn-main mt-2" style="width: 175px" data-bs-toggle="modal" data-bs-target="#cartaoModal">
-                                Adicionar
-                            </button>
-                            <div class="modal fade" id="cartaoModal" tabindex="-1" aria-labelledby="cartaoModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                  <div class="modal-content">
-                                    <form action = "{% url 'meus_dados' %}" method="post">
-                                      {% csrf_token %} 
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="cartaoModalLabel">Adicionar cartão</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col">
-                                                  <input type="text" class="form-control" placeholder="Nome" aria-label="Nome" name="nome">
-                                                </div>
-                                                <div class="col">
-                                                  <input type="text" class="form-control" placeholder="Sobrenome" aria-label="Sobrenome" name="sobrenome">
-                                                </div>
-                                            </div>
-                                            <div class="row pt-4">
-                                              <div class="col">
-                                                <input type="text" class="form-control" placeholder="Numero do cartão" aria-label="Numero do cartão" name="numero_cartao">
-                                              </div>
-                                            </div>
-                                            <div class="row pt-4">
-                                                <div class="col">
-                                                  <input type="date" class="form-control datePlaceholder" placeholder="Data de expiração" aria-label="Data de expiração" onfocus="(this.type='date')" name="data_expiracao">
-                                                </div>
-                                                <div class="col">
-                                                  <input type="text" class="form-control" placeholder="CVC" aria-label="CVC" name="cvc">
-                                                </div>
                                             </div>
                                           </div>
                                     </div>
