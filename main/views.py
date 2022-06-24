@@ -180,12 +180,16 @@ def produtos(request):
 def servicos(request): #FALTA TERMINAR
     enderecos = Endereco.objects.filter(user=request.user.id)
     pets = Animal.objects.filter(user=request.user.id)
-    try:
-        pet = request.GET['pet']
-        if Animal.objects.get(id=pet).user != request.user:
-            return HttpResponseForbidden()
-        raca = Animal.objects.get(id=pet).raca
-        servicos = Servico_Animal_Disponibilidade.objects.filter(raca=raca, disponivel=True)
-        return render(request, 'servicos.html', {'contexto':{'pets': pets, 'enderecos': enderecos, 'servicos': servicos, 'nome_pet': 'Selecione serviços - '+ Animal.objects.get(id=pet).nome}})
-    except:
-        return render(request, 'servicos.html', {'contexto':{'pets': pets}})
+    if request.method == 'GET':
+        try:
+            pet = request.GET['pet']
+            if Animal.objects.get(id=pet).user != request.user:
+                return HttpResponseForbidden()
+            raca = Animal.objects.get(id=pet).raca
+            servicos = Servico_Animal_Disponibilidade.objects.filter(raca=raca, disponivel=True)
+            return render(request, 'servicos.html', {'contexto':{'pets': pets, 'enderecos': enderecos, 'servicos': servicos, 'nome_pet': 'Selecione serviços - '+ Animal.objects.get(id=pet).nome}})
+        except:
+            return render(request, 'servicos.html', {'contexto':{'pets': pets}})
+
+    elif request.method == 'POST':
+        serv = request.POST['serv1']
