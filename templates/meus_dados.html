@@ -6,6 +6,9 @@
   <main>
     <div>
       <!--inicio container-->
+      {% for erro in erros %}
+      <p>{% include partials/warning.html %}</p>
+      {% endfor %}
       <div class="container-fluid">
         <div class="container">
           <div class="row py-5">
@@ -14,7 +17,7 @@
               <h1>Seus dados</h1>
             </div>
             <div class="col-3"></div>
-          </div>
+          </div>    
           <div class="row pb-2">
               <div class="col-2"></div>
               <div class="col">
@@ -23,11 +26,12 @@
                       <div class="justify-content-between">
                         <div>
                           <div class="ms-3">
-                            <h5>Dados b√°sicos</h4>
+                            <h5>Dados b·sicos</h4>
                                 <div class="container"> 
-                                    <h6 class="col-11 mb-2">Nome:</h6>            
-                                    <h6 class="mb-2">Sobrenome:</h6>
-                                    <h6 class="mb-2">CPF:</h6>
+                                    <h6 class="col-11 mb-2">Nome: {{ contexto.user.first_name }}</h6>            
+                                    <h6 class="mb-2">Sobrenome: {{ contexto.user.last_name }}</h6>
+                                    <h6 class="mb-2">CPF: {{ contexto.dados.cpf }}</h6>
+                                    <h6 class="mb-2">Telefone: {{ contexto.dados.telefone }}</h6>
                                 </div>
                           </div>
                         </div>
@@ -42,11 +46,8 @@
                               <div class="modal fade" id="dadosModal" tabindex="-1" aria-labelledby="dadosModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                   <div class="modal-content">
-                                    <form action = "{% url 'meus_dados' %}" method="post">
-                                      {% csrf_token %}
-                                      {% for erro in erros %}
-                                      <p>{{ erro }}</p>
-                                      {% endfor %}  
+                                    <form action = "{% url 'editar_dados' %}" method="post">
+                                    {% csrf_token %} 
                                     <div class="modal-header">
                                       <h5 class="modal-title" id="dadosModalLabel">Editar dados</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -55,36 +56,25 @@
                                         <div class="container">
                                             <div class="row">
                                               <div class="col">
-                                                <input type="text" class="form-control" placeholder="Nome" aria-label="Nome" name="nome">
+                                                <input type="text" class="form-control" placeholder="Nome" aria-label="Nome" name="nome" value="{{ contexto.user.first_name }}">
                                               </div>
                                               <div class="col">
-                                                <input type="text" class="form-control" placeholder="Sobrenome" aria-label="Sobrenome" name="sobrenome">
-                                              </div>
-                                            </div>
-                                            <div class="row pt-4">
-                                              <div class="col">
-                                                <input type="email" class="form-control" placeholder="E-mail" aria-label="E-mail" name="email">
-                                              </div>
-
-                                            </div>
-                                            <div class="row pt-4">
-                                              <div class="col">
-                                                <input type="text" class="form-control" id="cpf" placeholder="CPF" aria-label="CPF" name="cpf" data-mask="000.000.000-00">
+                                                <input type="text" class="form-control" placeholder="Sobrenome" aria-label="Sobrenome" name="sobrenome" value="{{ contexto.user.lat_name }}">
                                               </div>
                                             </div>
                                             <div class="row pt-4">
                                               <div class="col">
-                                                <input type="text" class="form-control" id="telefone" placeholder="Telefone" aria-label="Telefone" name="telefone" data-mask="(00)00000-0000">
+                                                <input type="email" class="form-control" placeholder="E-mail" aria-label="E-mail" name="email" value="{{ contexto.user.username }}">
                                               </div>
                                             </div>
                                             <div class="row pt-4">
                                               <div class="col">
-                                                <input type="password" class="form-control" placeholder="Senha" aria-label="Senha" name="senha">
+                                                <input type="text" class="form-control" id="cpf" placeholder="CPF" aria-label="CPF" name="cpf" data-mask="000.000.000-00" value="{{ contexto.dados.cpf }}">
                                               </div>
                                             </div>
                                             <div class="row pt-4">
                                               <div class="col">
-                                                <input type="password" class="form-control" placeholder="Confirmar senha" aria-label="Confirmar senha" name="senha2">
+                                                <input type="text" class="form-control" id="telefone" placeholder="Telefone" aria-label="Telefone" name="telefone" data-mask="(00)00000-0000" value="{{ contexto.dados.telefone }}">
                                               </div>
                                             </div>
                                           </div>
@@ -113,16 +103,14 @@
                     <div class="justify-content-between">
                       <div>
                         <div class="ms-3">
-                          <h5>Endere√ßo</h4>
+                          <h5>EndereÁos</h4>
                               <div class="container"> 
+                                {% for endereco in contexto.enderecos %}
                                 <div class="row">
-                                    <h6 class="col mb-2">Endere√ßo 1:</h6>  
-                                    <div class="col ms-4 d-flex justify-content-end"><button class="trashButton"><i class="fas fa-trash-alt iconHover" style="color: #cecece;"></i></button></div>
+                                    <h6 class="col mb-2">{{ endereco.rua }}, {{ endereco.numero }} - {{ endereco.cep }}</h6>  
+                                    <div class="col ms-4 d-flex justify-content-end"><button class="trashButton" href="{{ url 'excluir_endereco' endereco.id }}"><i class="fas fa-trash-alt iconHover" style="color: #cecece;"></i></button></div>
                                 </div>
-                                <div class="row">
-                                    <h6 class="col mb-2">Endere√ßo 2:</h6>  
-                                    <div class="col ms-4 d-flex justify-content-end"><button class="trashButton"><i class="fas fa-trash-alt iconHover" style="color: #cecece;"></i></button></div>
-                                </div>
+                                {% endfor %}
                               </div>
                         </div>
                       </div>
@@ -137,20 +125,17 @@
                             <div class="modal fade" id="enderecoModal" tabindex="-1" aria-labelledby="enderecoModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                   <div class="modal-content">
-                                    <form action = "{% url 'meus_dados' %}" method="post">
-                                      {% csrf_token %}
-                                      {% for erro in erros %}
-                                      <p>{{ erro }}</p>
-                                      {% endfor %}  
+                                    <form action = "{% url 'adicionar_endereco' %}" method="post">
+                                      {% csrf_token %} 
                                     <div class="modal-header">
-                                      <h5 class="modal-title" id="enderecoModalLabel">Adicionar endere√ßo</h5>
+                                      <h5 class="modal-title" id="enderecoModalLabel">Adicionar endereÁo</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="container">
                                             <div class="row">
                                               <div class="col">
-                                                <input type="text" class="form-control" id="CEP" placeholder="CEP" aria-label="CEP" name="cep">
+                                                <input type="text" class="form-control" id="CEP" placeholder="CEP" aria-label="CEP" name="cep" data-mask="00000-000">
                                               </div>
                                             </div>
                                             <div class="row pt-4">
@@ -168,7 +153,7 @@
                                                 <input type="text" class="form-control" placeholder="Complemento" aria-label="Complemento" name="complemento">
                                               </div>
                                               <div class="col-4">
-                                                <input type="text" class="form-control" placeholder="N√∫mero" aria-label="N√∫mero" name="numero">
+                                                <input type="text" class="form-control" placeholder="N˙mero" aria-label="N˙mero" name="numero">
                                               </div>
                                             </div>
                                           </div>
@@ -222,10 +207,7 @@
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                   <div class="modal-content">
                                     <form action = "{% url 'meus_dados' %}" method="post">
-                                      {% csrf_token %}
-                                      {% for erro in erros %}
-                                      <p>{{ erro }}</p>
-                                      {% endfor %}  
+                                      {% csrf_token %} 
                                     <div class="modal-header">
                                       <h5 class="modal-title" id="cartaoModalLabel">Adicionar cart√£o</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

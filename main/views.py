@@ -7,7 +7,7 @@ from xmlrpc.client import DateTime
 from django.forms import ValidationError
 from django.shortcuts import redirect, render, get_list_or_404, get_object_or_404
 from django.http import HttpResponse, HttpRequest, HttpResponseForbidden, HttpResponseRedirect
-from .validations import campos_em_branco, senhas_iguais
+from .validations import *
 from django.contrib.auth.models import User
 from .models import *
 from django.contrib import auth
@@ -71,8 +71,37 @@ def logout(request):
     auth.logout(request)
     return redirect('index')
 
+def adicionar_endereco(request):
+    if request.method == 'POST':
+        mensagens_erro = []
+        cep = request.POST['cep'].strip()
+        cidade = request.POST['cidade'].strip()
+        rua = request.POST['rua'].strip()
+        complemento = request.POST['complemento'].strip()
+        numero = request.POST['numero'].strip()
+
+        campos_em_branco([cep, cidade, rua, complemento, numero], mensagens_erro)
+        valida_cep_normal(cep, mensagens_erro)
+        if(len(mensagens_erro) > 0):
+            return HttpResponseRedirect('meus_dados', headers={'erro': 'true'})
+        else:
+            endereco = Endereco(
+                cep=cep, 
+                cidade=cidade, 
+                rua=rua, 
+                complemento=complemento, 
+                numero=numero)
+            endereco.save()
+            return redirect('meus_dados')
+
+def editar_dados(request):
+    pass
+
 def meus_dados(request):
-    return render(request, 'meus_dados.html')
+    if request.GET['erro']:
+        return render(request, 'meus_dados.html', {'erros': 'Formulário preenchido incorretamente'})
+    else:
+        return render(request, 'meus_dados.html')
 
 def meus_pets(request):
     pets = Animal.objects.filter(user=request.user.id)

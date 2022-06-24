@@ -14,6 +14,11 @@ def campos_em_branco(campos, lista):
     if branco:
         lista.append('Preencha todos os campos!')
 
+def valida_cep_normal(cep, lista):
+    if re.search(r'[0-9]{5}-[0-9]{3}', cep) == None:
+        lista.append('CEP Inválido')
+
+
 #VALIDADORES ADMIN
 
 def valida_formato_cpf(cpf):
