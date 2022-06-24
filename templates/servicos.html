@@ -39,6 +39,7 @@
           {% for servico in contexto.servicos %}
           {% include 'partials/servicos.html' %}
           {% endfor %}
+          {% if contexto.servicos %}
           <div class="row pt-5">
             <div class="col-3"></div>
             <div class="col">
@@ -55,7 +56,7 @@
             <div class="row pt-2">
                 <div class="col-3"></div>
                 <div class="col">
-                  <h4>Como deseja que seu pet vá para o petshop?</h4>
+                  <h5>Como deseja que seu pet vá para o petshop?</h5>
                 </div>
                 <div class="col-3"></div>
               </div>
@@ -64,13 +65,13 @@
                 <div class="col">
                     <div class="col-sm-10">
                         <div class="form-check">
-                          <input class="form-check-input customCheck" type="radio" name="gridRadios1" id="gridRadios1-1" value="option1" checked>
+                          <input class="form-check-input customCheck" type="radio" onclick="handleRadio()" name="gridRadios1" id="gridRadios1-1" value="option1" checked>
                           <label class="form-check-label customLabelRadio" for="gridRadios1">
                             Quero levar meu pet
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input customCheck" type="radio" name="gridRadios1" id="gridRadios1-2" value="option2">
+                          <input class="form-check-input customCheck" type="radio" onclick="handleRadio()" name="gridRadios1" id="gridRadios1-2" value="option2">
                           <label class="form-check-label customLabelRadio" for="gridRadios2">
                             Quero que busquem meu pet
                           </label>
@@ -82,7 +83,7 @@
               <div class="row pt-3">
                 <div class="col-3"></div>
                 <div class="col">
-                  <h4>Como deseja que seu pet volte para casa?</h4>
+                  <h5>Como deseja que seu pet volte para casa?</h5>
                 </div>
                 <div class="col-3"></div>
               </div>
@@ -91,22 +92,41 @@
                 <div class="col">
                     <div class="col-sm-10">
                         <div class="form-check">
-                          <input class="form-check-input customCheck" type="radio" name="gridRadios2" id="gridRadios2-1" value="option1" checked>
+                          <input class="form-check-input customCheck" type="radio" name="gridRadios2" onclick="handleRadio()" id="gridRadios2-1" value="option1" checked>
                           <label class="form-check-label customLabelRadio" for="gridRadios1">
                             Quero buscar meu pet
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input customCheck" type="radio" name="gridRadios2" id="gridRadios2-2" value="option2">
+                          <input class="form-check-input customCheck" type="radio" name="gridRadios2" onclick="handleRadio()" id="gridRadios2-2" value="option2">
                           <label class="form-check-label customLabelRadio" for="gridRadios2">
-                            Quero que tragam meu pet
+                            Quero que tragam meu pet para casa
                           </label>
                         </div>
                       </div>
                 </div>
                 <div class="col-3"></div>
               </div>
+              <script>
+                function handleRadio() {
+                  if ((document.getElementById("gridRadios1-2").checked) || (document.getElementById("gridRadios2-2").checked)) {
+                    document.getElementById("div_endereco").hidden=false
+                    document.getElementById("div_label_endereco").hidden=false
+                  }
+                  else {
+                    document.getElementById("div_endereco").hidden=true
+                    document.getElementById("div_label_endereco").hidden=true
+                  }
+                }
+              </script>
               <div class="row pt-4">
+                <div class="col-3"></div>
+                <div class="col">
+                  <h5>Selecione a forma de pagamento</h5>
+                </div>
+                <div class="col-3"></div>
+              </div>
+              <div class="row pt-1">
                 <div class="col-3"></div>
                 <div class="col">
                     <select class="form-select" aria-label="Default select example">
@@ -118,10 +138,17 @@
                 </div>
                 <div class="col-4"></div>
               </div>
-              <div class="row pt-4">
+              <div class="row pt-4" id="div_label_endereco" hidden>
                 <div class="col-3"></div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example">
+                  <h5>Selecione o endereço</h5>
+                </div>
+                <div class="col-3"></div>
+              </div>
+              <div class="row pt-1" id="div_endereco" hidden>
+                <div class="col-3"></div>
+                <div class="col">
+                    <select class="form-select" aria-label="Default select example" id="endereco" name="endereco">
                       {% for endereco in contexto.enderecos %}
                       <option value="{{ endereco.id }}">{{ endereco.rua }}, {{ endereco.numero }} - {{ endereco.cep }} </option>
                       {% endfor %}  
@@ -130,9 +157,16 @@
                 <div class="col-4"></div>
               </div>
               <div class="row pt-4">
-                <div class="col-2"></div>
+                <div class="col-3"></div>
                 <div class="col">
-                  <input type="date" class="form-control datePlaceholder" placeholder="Agendamento" aria-label="Agenda" name="agenda">
+                  <h5>Agendar serviços para</h5>
+                </div>
+                <div class="col-3"></div>
+              </div>
+              <div class="row pt-1">
+                <div class="col-3"></div>
+                <div class="col">
+                  <input type="datetime-local" class="form-control dateTimePlaceholder" placeholder="Agendamento" aria-label="Agenda" name="agenda">
                 </div>
                 <div class="col-4"></div>
               </div>
@@ -149,7 +183,8 @@
             <div class="col-8"></div>
             <a type="button" class="btn col btn-main" href="">Confirmar serviços</a>
             <div class="col-2"></div>
-          </div>      
+          </div>
+        {% endif %}      
         <!--quarta linha-->
         {% include 'partials/footer.html' %}
       </div>
