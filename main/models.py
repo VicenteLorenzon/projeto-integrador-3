@@ -104,14 +104,14 @@ class Solicitacao(models.Model):
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     horario = models.DateTimeField()
     servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
-    endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE)
+    endereco = models.ForeignKey(Endereco, blank=True, on_delete=models.CASCADE)
     forma_entrada = models.CharField(max_length=1, choices=[('P', 'Buscar no endereço'), ('C', 'Cliente leva')])
     forma_saida = models.CharField(max_length=1, choices=[('P', 'Levar ao cliente'), ('C', 'Cliente busca')])
     valor = models.DecimalField(decimal_places=2, max_digits=12)
-    status = models.CharField(max_length=1, choices=[('A', 'Ainda não iniciado'), 
-                                                     ('B', 'Em andamento no pet shop'), 
-                                                     ('C', 'Concluído, pet já em casa'), 
-                                                     ('D', 'Concluído, aguardando retirada do pet')])
+    status = models.CharField(max_length=1, default='A',choices=[('A', 'Ainda não iniciado'), 
+                                                                 ('B', 'Em andamento no pet shop'), 
+                                                                 ('C', 'Concluído, pet já em casa'), 
+                                                                 ('D', 'Concluído, aguardando retirada do pet')])
     class Meta:
         verbose_name = "Solicitação"
         verbose_name_plural = "Solicitações"

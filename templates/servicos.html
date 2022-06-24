@@ -25,21 +25,27 @@
                     <option value="{{ pet.id }}">{{pet.nome}}</option>
                     {% endfor %}
                 </select>
-              <form>
+              </form>
             </div>
             <div class="col-6"></div>
           </div>
+          <form action="{% url 'servicos' %}" method="post">
+            {% csrf_token %}
+            {% for erro in contexto.erros %}
+            <p>{% include 'partials/warning.html' %}</p>
+            {% endfor %}
+          {% if contexto.servicos %}
           <div class="row pt-5">
             <div class="col-2"></div>
             <div class="col">
-              <h4>{{ contexto.nome_pet }}</h4>
+              <h4>Selecionar serviços - {{ contexto.pet.nome }}</h4>
+              <input type="text" value="{{ contexto.pet.id }}" name="pet" hidden>
             </div>
             <div class="col-3"></div>
           </div>
           {% for servico in contexto.servicos %}
           {% include 'partials/servicos.html' %}
           {% endfor %}
-          {% if contexto.servicos %}
           <div class="row pt-5">
             <div class="col-3"></div>
             <div class="col">
@@ -48,11 +54,6 @@
             <div class="col-3"></div>
           </div>
           <div class="container ms-3">
-            <form action="{% url 'servicos' %}" method="post">
-              {% csrf_token %}
-              {% for erro in erros %}
-              <p>{{ erro }}</p>
-              {% endfor %}
             <div class="row pt-2">
                 <div class="col-3"></div>
                 <div class="col">
@@ -65,13 +66,13 @@
                 <div class="col">
                     <div class="col-sm-10">
                         <div class="form-check">
-                          <input class="form-check-input customCheck" type="radio" onclick="handleRadio()" name="gridRadios1" id="gridRadios1-1" value="option1" checked>
+                          <input class="form-check-input customCheck" type="radio" onclick="handleRadio()" name="forma_entrada" id="gridRadios1-1" value="C" checked>
                           <label class="form-check-label customLabelRadio" for="gridRadios1">
                             Quero levar meu pet
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input customCheck" type="radio" onclick="handleRadio()" name="gridRadios1" id="gridRadios1-2" value="option2">
+                          <input class="form-check-input customCheck" type="radio" onclick="handleRadio()" name="forma_entrada" id="gridRadios1-2" value="P">
                           <label class="form-check-label customLabelRadio" for="gridRadios2">
                             Quero que busquem meu pet
                           </label>
@@ -92,13 +93,13 @@
                 <div class="col">
                     <div class="col-sm-10">
                         <div class="form-check">
-                          <input class="form-check-input customCheck" type="radio" name="gridRadios2" onclick="handleRadio()" id="gridRadios2-1" value="option1" checked>
+                          <input class="form-check-input customCheck" type="radio" name="forma_saida" onclick="handleRadio()" id="gridRadios2-1" value="C" checked>
                           <label class="form-check-label customLabelRadio" for="gridRadios1">
                             Quero buscar meu pet
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input customCheck" type="radio" name="gridRadios2" onclick="handleRadio()" id="gridRadios2-2" value="option2">
+                          <input class="form-check-input customCheck" type="radio" name="forma_saida" onclick="handleRadio()" id="gridRadios2-2" value="P">
                           <label class="form-check-label customLabelRadio" for="gridRadios2">
                             Quero que tragam meu pet para casa
                           </label>
@@ -181,9 +182,10 @@
         </div> 
         <div class="row p-4">
             <div class="col-8"></div>
-            <a type="button" class="btn col btn-main" href="">Confirmar serviços</a>
+            <button type="submit" class="btn col btn-main">Confirmar serviços</button>
             <div class="col-2"></div>
           </div>
+        </form>
         {% endif %}      
         <!--quarta linha-->
         {% include 'partials/footer.html' %}

@@ -187,9 +187,60 @@ def servicos(request): #FALTA TERMINAR
                 return HttpResponseForbidden()
             raca = Animal.objects.get(id=pet).raca
             servicos = Servico_Animal_Disponibilidade.objects.filter(raca=raca, disponivel=True)
-            return render(request, 'servicos.html', {'contexto':{'pets': pets, 'enderecos': enderecos, 'servicos': servicos, 'nome_pet': 'Selecione serviços - '+ Animal.objects.get(id=pet).nome}})
+            print(servicos)
+            return render(request, 'servicos.html', {
+                'contexto':{
+                    'pets': pets, 
+                    'enderecos': enderecos, 
+                    'servicos': servicos, 
+                    'pet': Animal.objects.get(id=pet)
+                }
+            })
+            
         except:
             return render(request, 'servicos.html', {'contexto':{'pets': pets}})
 
     elif request.method == 'POST':
-        serv = request.POST['serv1']
+        erros = []
+        servicos_selecionados = []
+        for item, valor in request.POST.items():
+                if(item.find('serv') != -1):
+                    servicos_selecionados.append(int(item.split('serv')[1]))
+                    print(servicos_selecionados)
+        if len(servicos_selecionados) == 0:
+            erros.append('Você deve selecionar pelo menos um serviço')
+        pet = request.POST['pet']
+        horario = request.POST['agenda']
+        forma_entrada = request.POST['forma_entrada']
+        forma_saida = request.POST['forma_saida']
+        endereco = request.POST['endereco']        
+
+        if len(erros) > 0:
+            return render(request, 'servicos.html', {'contexto':{'pets': pets, 'erros': erros}})
+        else:
+            for servico in servicos_selecionados: 
+                solicitacao = 0
+                if(not (forma_entrada == 'C' and forma_saida == 'C')): 
+                    solicitacao = Solicitacao(
+                        animal = Animal.objects.get(id=request.POST['pet']),
+                        horario = horario,
+                        servico = Servico.objects.get(id=servico),
+                        endereco = Endereco.objects.get(id=endereco),
+                        forma_entrada = forma_entrada,
+                        forma_saida = forma_saida,
+                        valor = Servico.objects.get(id=servico).preco,
+                        status = 'A'
+                    )
+                else:
+                    solicitacao = Solicitacao(
+                        animal = Animal.objects.get(id=request.POST['pet']),
+                        horario = horario,
+                        servico = Servico.objects.get(id=servico),
+                        forma_entrada = forma_entrada,
+                        forma_saida = forma_saida,
+                        valor = Servico.objects.get(id=servico).preco,
+                        status = 'A' 
+                    ) 
+                solicitacao.save() 
+                return redirect('index')     
+        
