@@ -17,12 +17,8 @@ import os
 
 def index(request):
     produtos = Produto.objects.all()
-    try:
-        solicitacoes = Solicitacao.objects.filter(animal__in = Animal.objects.filter(user=request.user))
-        
-        return render(request, 'index.html', {'produtos': produtos, 'solicitacoes': solicitacoes})
-    except:
-        return render(request, 'index.html', {'produtos': produtos})
+    return render(request, 'index.html', {'produtos': produtos})
+
 def perguntas_frequentes(request):
     return render(request, 'perguntas_frequentes.html')
 
@@ -143,6 +139,10 @@ def meus_dados(request):
 def meus_pets(request):
     pets = Animal.objects.filter(user=request.user.id)
     return render(request, 'meus_pets.html', {'pets': pets})
+
+def minhas_solicitacoes(request):
+    solicitacoes = Solicitacao.objects.filter(animal__in = Animal.objects.filter(user=request.user))
+    return render(request, 'minhas_solicitacoes.html', context={'solicitacoes': solicitacoes}) 
 
 def adicionar_pet(request):
     if request.method == 'GET':
