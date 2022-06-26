@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body>
+  {% include 'partials/header.html' %}
+<main>
+    {% for solicitacao in solicitacoes %}
+    {{ solicitacao.animal.nome }}
+    
+    {% endfor %}
+
+  {% include 'partials/footer.html' %}
+</main>
+{% endblock %}
