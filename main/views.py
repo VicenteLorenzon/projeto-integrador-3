@@ -239,7 +239,7 @@ def finalizar_compra(request):
                 quantidade=item.quantidade,
                 valor_total=(item.quantidade * item.valor_unit)
             )
-            produto.estoque = produto - item.quantidade
+            produto.estoque = produto.estoque - item.quantidade
             produto.save()
             venda.save()
 
@@ -317,11 +317,12 @@ def servicos(request):
                         animal = Animal.objects.get(id=request.POST['pet']),
                         horario = horario,
                         servico = Servico.objects.get(id=servico),
+                        endereco = None,
                         forma_entrada = forma_entrada,
                         forma_saida = forma_saida,
                         valor = Servico.objects.get(id=servico).preco,
                         status = 'A' 
                     ) 
                 solicitacao.save() 
-                return redirect('index')     
+            return redirect('index')     
         

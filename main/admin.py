@@ -37,7 +37,7 @@ class Servico_admin(admin.ModelAdmin):
     search_fields = ('servico', )
 
 class Solicitacao_admin(admin.ModelAdmin):
-    list_display = ('id', 'animal', 'servico', 'status', 'horario')
+    list_display = ('id', 'animal', 'servico', 'status', 'horario', )
     list_display_links = ('id', 'animal', 'servico', )
     search_fields = ('animal', 'servico', )
 
