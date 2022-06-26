@@ -39,19 +39,11 @@
                         <a href="{% url 'carrinho' %}" type="button" class="btn ms-2"><i class="fa-solid fa-cart-shopping fa-2x"></i></a>
                       </li> 
                       <li class="nav-item dropdown">
-                        <button type="button" class="btn ms-2" id="navbrDropdown" role="button" data-bs-toggle="dropdown"
-                          aria-haspopup="true" aria-expanded="false">
-                          <i class="fa-regular fa-bell fa-2x">
-                            <div class="dropdown-toggle" id="customDropdown"></div>
-                          </i>
-                        </button>
-                        <ul class="dropdown-menu p-3 dropdown-menu-end" aria-labelledby="navbarDropdown" id="notifMenu">
-                        {% for solicitacao in solicitacoes %}
-                          <li><a id="notifInfo" href="{% url 'index' %}">{{ solicitacao.servico.servico }} - {{ solicitacao.animal.nome }}, status: {{ solicitacao.status. }}</a></li>
-                          <div class="dropdown-divider"></div>
-                        {% endfor %}
-                        </ul>
-                        <!--<i class="fa-solid fa-bell"></i>-->
+                        <a href="{% url 'minhas_solicitacoes' %}">
+                             <button class="btn ms-2" role="button">
+                                <i class="fa-solid fa-truck fa-2x"></i>
+                             </button>
+                        </a>
                       </li>
                       <li class="nav-item dropdown">
                         <button type="button" class="btn ms-2" id="navbrDropdown" role="button" data-bs-toggle="dropdown"
