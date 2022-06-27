@@ -14,7 +14,14 @@
             <div class="col-3"></div>
           </div>
            {% for solicitacao in solicitacoes %}
-           {{ solicitacao.animal.nome }}
+           {% if solicitacao.status != 'C' %}
+           {% include 'partials/solicitacao.html' %}
+           {% endif %}
+           {% endfor %}
+           {% for solicitacao in solicitacoes %}
+           {% if solicitacao.status == 'C' %}
+           {% include 'partials/solicitacao.html' %}
+           {% endif %}
            {% endfor %}
   {% include 'partials/footer.html' %}
 </main>

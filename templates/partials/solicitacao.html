@@ -7,17 +7,27 @@
               <div class="d-flex flex-row align-items-center">
                 <div>
                   <img
-                    src="dogpaw.png"
+                    src="{{ solicitacao.servico.foto.url }}"
                     class="img-fluid rounded-3" style="width: 65px;">
                 </div>
                 <div class="ms-3">
-                  <h5>Serviço</h5>
-                  <p class="small mb-0">Descrição</p>
+                  <h5>{{ solicitacao.animal.nome }}</h5>
+                  <p class="small mb-0">{{ solicitacao.servico.servico }}</p>
                 </div>
               </div>
               <div class="d-flex flex-row align-items-center">
                 <div style="width: 160px;">
-                  <h5 class="mb-0">Status serviço</h5>
+                  <h5 class="mb-0">
+                  {% if solicitacao.status == 'A' %}
+                    Serviço ainda não iniciado
+                  {% elif solicitacao.status == 'B' %}
+                    Serviço em andamento no pet shop
+                  {% elif solicitacao.status == 'C' %}
+                    Serviço finalizado
+                  {% elif solicitacao.status == 'D' %}
+                    Pet liberado para busca no pet shop
+                  {% endif %}
+                  </h5>
                 </div>
               </div>
             </div>
